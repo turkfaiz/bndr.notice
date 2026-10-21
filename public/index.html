@@ -4,23 +4,27 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0B3D32">
-<title>بلاغ ميداني | المسجد الحرام</title>
-<link rel="icon" href="assets/logo.svg">
+<title>بلاغ ميداني</title>
+<link rel="icon" href="assets/logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Noto+Kufi+Arabic:wght@600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/theme.css">
 <style>
   :root{padding-top:0}
-  .hero{position:relative;color:#fff;min-height:330px;padding:calc(22px + env(safe-area-inset-top,0px)) 18px 78px;
+  .hero{position:relative;color:#fff;min-height:350px;isolation:isolate;padding:calc(22px + env(safe-area-inset-top,0px)) 18px 78px;
     background:linear-gradient(180deg,rgba(7,40,32,.55) 0%,rgba(7,40,32,.35) 40%,rgba(11,61,50,.96) 100%),url("assets/haram.jpg") center 35%/cover no-repeat;
     display:flex;flex-direction:column;justify-content:flex-end}
+  .hero::before{content:"";position:absolute;inset:0;z-index:-1;background:var(--pattern);background-size:80px;
+    -webkit-mask-image:linear-gradient(180deg,transparent 30%,#000 85%);mask-image:linear-gradient(180deg,transparent 30%,#000 85%)}
   .hero-in{max-width:720px;margin:0 auto;width:100%}
+  .frieze{height:14px;background:var(--frieze) repeat-x center;margin:16px 0 0;opacity:.95}
   .brand{display:flex;align-items:center;gap:14px}
-  .brand img{width:50px;height:50px;filter:drop-shadow(0 2px 8px rgba(0,0,0,.3))}
-  .org{margin:0;font-size:13px;color:var(--gold-300);text-shadow:0 1px 4px rgba(0,0,0,.4)}
-  .brand h1{font-size:30px;font-weight:800;text-shadow:0 2px 12px rgba(0,0,0,.35)}
-  .pulse{display:grid;grid-template-columns:repeat(3,1fr);margin-top:20px;background:rgba(11,61,50,.55);backdrop-filter:blur(6px);
+  .brand{flex-direction:column;align-items:flex-start;gap:10px}
+  .brand img{height:66px;width:auto;filter:drop-shadow(0 2px 10px rgba(0,0,0,.35))}
+  .org{margin:0;font-size:14px;font-weight:600;color:var(--gold-300);text-shadow:0 1px 4px rgba(0,0,0,.45)}
+  .brand h1{font-size:34px;font-weight:800;text-shadow:0 2px 12px rgba(0,0,0,.35)}
+  .pulse{display:grid;grid-template-columns:repeat(3,1fr);margin-top:14px;background:rgba(11,61,50,.55);backdrop-filter:blur(6px);
     border:1px solid rgba(201,174,122,.35);border-radius:var(--r-md)}
   .pulse div{padding:10px 14px;display:flex;flex-direction:column}
   .pulse div + div{border-inline-start:1px solid rgba(201,174,122,.25)}
@@ -42,11 +46,17 @@
   .geo{margin-top:14px;width:100%;display:flex;align-items:center;gap:10px;border:1px dashed var(--gold-300);background:var(--gold-100);color:#6E5530;border-radius:var(--r-md);padding:12px 14px;cursor:pointer;font-weight:600;min-height:48px;text-align:start}
   .geo.ok{border-style:solid;border-color:var(--st-closed);background:#E3F1EA;color:var(--st-closed)}
   .route{margin:10px 0 0;font-size:14px;color:var(--green-700);display:flex;gap:8px;align-items:center;background:var(--green-100);padding:9px 12px;border-radius:10px}
-  .suggest{border:1px solid var(--gold-300);background:var(--gold-100);border-radius:var(--r-md);padding:12px;margin-top:6px}
-  .suggest .t{display:flex;align-items:center;gap:8px;font-size:13.5px;font-weight:600;color:#6E5530;margin-bottom:8px}
-  .suggest select{background-color:#fff}
-  .or{display:flex;align-items:center;gap:10px;color:var(--muted);font-size:13px;margin:12px 0 8px}
-  .or::before,.or::after{content:"";flex:1;height:1px;background:var(--line)}
+  .sug-h{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:6px 0 8px}
+  .sug-h b{font-size:14px}
+  .sug-h span{font-size:12.5px;color:#6E5530;background:var(--gold-100);border-radius:999px;padding:2px 10px;font-weight:600}
+  .sug{display:flex;flex-direction:column;gap:8px}
+  .sug button{display:flex;align-items:center;gap:12px;width:100%;text-align:start;border:1px solid var(--line);background:var(--surface);
+    border-radius:var(--r-md);padding:13px 14px;cursor:pointer;font-size:15.5px;font-weight:500;min-height:52px;transition:background .12s,border-color .12s}
+  .sug button i{width:24px;height:24px;border-radius:50%;border:2px solid #C9D3CF;flex:none;display:grid;place-items:center;color:#fff}
+  .sug button i .ic{width:14px;height:14px;stroke-width:3;opacity:0}
+  .sug button[aria-pressed="true"]{border-color:var(--green-700);background:var(--green-100);font-weight:600;color:var(--green-900)}
+  .sug button[aria-pressed="true"] i{background:var(--green-700);border-color:var(--green-700)}
+  .sug button[aria-pressed="true"] i .ic{opacity:1}
   .photo{margin-top:16px;display:flex;align-items:center;justify-content:center;gap:10px;border:1.5px dashed var(--line);border-radius:var(--r-md);padding:18px;cursor:pointer;color:var(--green-800);font-weight:600;min-height:64px}
   .photo .ic{width:26px;height:26px}
   .prev{margin-top:16px;position:relative}
@@ -76,9 +86,10 @@
 <header class="hero">
   <div class="hero-in">
     <div class="brand">
-      <img src="assets/logo.svg" alt="">
-      <div><p class="org" id="org"></p><h1>بلاغ ميداني — المسجد الحرام</h1></div>
+      <img src="assets/logo-light.png" alt="رئاسة الشؤون الدينية بالمسجد الحرام والمسجد النبوي">
+      <div><p class="org" id="org"></p><h1>بلاغ ميداني</h1></div>
     </div>
+    <div class="frieze" aria-hidden="true"></div>
     <div class="pulse" aria-live="polite">
       <div><b class="num" id="sToday">–</b><span>بلاغات اليوم</span></div>
       <div><b class="num" id="sClosed">–</b><span>عولجت اليوم</span></div>
@@ -92,7 +103,7 @@
   <div id="form" hidden>
     <section class="step" id="stepName">
       <h2><span class="n">1</span>المُبلّغ</h2>
-      <label class="lbl" for="rname">اسمك</label>
+      <label class="lbl" for="rname">اسمك <small id="nameOpt">(اختياري)</small></label>
       <select id="rname" required></select>
       <input id="rnameTxt" placeholder="اكتب اسمك" hidden>
     </section>
@@ -119,11 +130,10 @@
 
     <section class="step">
       <h2><span class="n">4</span>التفاصيل</h2>
-      <div class="suggest" id="suggestBox" hidden>
-        <div class="t" id="sugT"></div>
-        <select id="suggest" aria-label="أوصاف مقترحة"></select>
+      <div id="suggestBox" hidden>
+        <div class="sug-h"><b>أوصاف مقترحة</b><span>اضغط على ما ينطبق، أو اكتب بنفسك</span></div>
+        <div class="sug" id="suggest" role="group" aria-label="أوصاف مقترحة"></div>
       </div>
-      <div class="or" id="orLine" hidden>أو اكتب الوصف بنفسك</div>
       <label class="lbl" for="details" id="detLbl">الوصف</label>
       <textarea id="details" rows="3" maxlength="1500" placeholder="اكتب ما شاهدته باختصار"></textarea>
       <span class="lbl">الأولوية</span>
@@ -161,21 +171,25 @@
   $('photoIc').innerHTML = ic('camera');
   $('rmPhoto').innerHTML = ic('x') + 'حذف الصورة';
   $('okIc').innerHTML = ic('check');
-  $('sugT').innerHTML = ic('list') + 'أوصاف مقترحة — اختر منها إن وُجد ما يناسب';
 
   // يتلوّن الحقل الفارغ بلون باهت
   const markEmpty = el => el.classList.toggle('empty', !el.value);
   document.addEventListener('change', e => { if (e.target.tagName === 'SELECT') markEmpty(e.target); });
 
   function build() {
-    if (OPT.reporters.length) {
-      $('rname').innerHTML = opts(OPT.reporters, 'اختر اسمك من القائمة');
+    const nm = OPT.name_mode || 'optional';
+    // ترقيم الأقسام حسب ظهور خانة الاسم
+    if (nm === 'off') { $('stepName').remove(); document.querySelectorAll('.step .n').forEach((n, i) => n.textContent = i + 1); }
+    else $('nameOpt').hidden = nm === 'required';
+    if (nm === 'off') {}
+    else if (OPT.reporters.length) {
+      $('rname').innerHTML = opts(OPT.reporters, nm === 'required' ? 'اختر اسمك من القائمة' : 'اختر اسمك (اختياري)');
       const last = store.get('bn_name'); if (OPT.reporters.includes(last)) $('rname').value = last;
     } else { $('rname').hidden = true; $('rnameTxt').hidden = false; $('rnameTxt').value = store.get('bn_name'); }
     $('zone').innerHTML = opts(OPT.zones, 'اختر المنطقة');
     $('floor').innerHTML = opts(OPT.floors, 'اختر الدور');
     $('cat').innerHTML = `<option value="" disabled selected>اختر نوع الملاحظة</option>` + OPT.categories.map(c => `<option value="${esc(c.id)}">${esc(c.label)}</option>`).join('');
-    ['rname', 'zone', 'floor', 'cat'].forEach(id => markEmpty($(id)));
+    ['rname', 'zone', 'floor', 'cat'].forEach(id => $(id) && markEmpty($(id)));
     $('loading').hidden = true; $('form').hidden = false; $('send').disabled = false;
   }
 
@@ -183,16 +197,13 @@
     const c = OPT.categories.find(x => x.id === $('cat').value); if (!c) return;
     $('route').hidden = !c.entity_name; $('route').innerHTML = ic('chat') + 'يُحال البلاغ إلى: ' + esc(c.entity_name);
     const has = c.quick && c.quick.length;
-    $('suggestBox').hidden = !has; $('orLine').hidden = !has; $('detLbl').hidden = !!has;
-    if (has) { $('suggest').innerHTML = opts(c.quick, 'اختر وصفاً مقترحاً (اختياري)'); markEmpty($('suggest')); }
+    $('suggestBox').hidden = !has;
+    $('detLbl').textContent = has ? 'تفاصيل إضافية (اختياري)' : 'الوصف';
+    $('details').placeholder = has ? 'أي تفاصيل أخرى لم تذكرها الأوصاف' : 'اكتب ما شاهدته باختصار';
+    $('suggest').innerHTML = has ? c.quick.map(q => `<button type="button" aria-pressed="false" data-v="${esc(q)}"><i>${ic('check')}</i>${esc(q)}</button>`).join('') : '';
   });
-  $('suggest').addEventListener('change', () => {
-    const v = $('suggest').value; if (!v) return;
-    const lines = $('details').value.split('\n').map(x => x.trim()).filter(Boolean);
-    if (!lines.includes(v)) lines.push(v);
-    $('details').value = lines.join('\n');
-    $('suggest').selectedIndex = 0; markEmpty($('suggest'));
-  });
+  $('suggest').addEventListener('click', e => { const b = e.target.closest('button'); if (b) b.setAttribute('aria-pressed', b.getAttribute('aria-pressed') !== 'true'); });
+  const picked = () => [...$('suggest').querySelectorAll('[aria-pressed="true"]')].map(b => b.dataset.v);
 
   // الموقع الجغرافي
   const geoIdle = t => { $('geoBtn').className = 'geo'; $('geoBtn').innerHTML = ic('pin') + `<span>${t || 'إرفاق موقعي الحالي (يساعد الفريق على الوصول)'}</span>`; };
@@ -228,19 +239,19 @@
 
   // الإرسال
   function showErr(t, el) { $('err').textContent = t; if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
-  const reporter = () => OPT.reporters.length ? $('rname').value : $('rnameTxt').value.trim();
+  const reporter = () => !$('rname') ? '' : OPT.reporters.length ? ($('rname').value || '') : $('rnameTxt').value.trim();
   $('send').addEventListener('click', async () => {
     showErr('');
-    if (!reporter()) return showErr('اختر اسمك أولاً', $('stepName'));
+    if (OPT.name_mode === 'required' && !reporter()) return showErr('اختر اسمك أولاً', $('stepName'));
     if (!$('zone').value) return showErr('اختر المنطقة التي فيها الملاحظة', $('stepPlace'));
     if (!$('cat').value) return showErr('اختر نوع الملاحظة', $('stepCat'));
     const c = OPT.categories.find(x => x.id === $('cat').value);
-    store.set('bn_name', reporter());
+    if (reporter()) store.set('bn_name', reporter());
     const btn = $('send'); btn.disabled = true; btn.textContent = 'جارٍ الإرسال…';
     try {
       const r = await fetch('/api/reports', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({
         key, zone: $('zone').value, floor: $('floor').value, gate: $('gate').value, spot: $('spot').value,
-        lat: st.lat, lng: st.lng, acc: st.acc, category: c.id, priority: st.priority, details: $('details').value, photo: st.photo, reporter_name: reporter() }) });
+        lat: st.lat, lng: st.lng, acc: st.acc, category: c.id, priority: st.priority, details: [...picked(), $('details').value.trim()].filter(Boolean).join('\n'), photo: st.photo, reporter_name: reporter() }) });
       const d = await r.json();
       if (!r.ok) throw new Error(d.error || 'تعذّر الإرسال');
       $('doneRef').textContent = d.ref;
@@ -255,7 +266,7 @@
     ['zone', 'floor', 'cat'].forEach(id => { $(id).selectedIndex = 0; markEmpty($(id)); });
     ['gate', 'spot', 'details'].forEach(id => $(id).value = '');
     st.priority = 'normal'; st.photo = ''; $('prio').querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', x.dataset.v === 'normal'));
-    $('route').hidden = $('suggestBox').hidden = $('orLine').hidden = true; $('detLbl').hidden = false;
+    $('route').hidden = $('suggestBox').hidden = true; $('suggest').innerHTML = ''; $('detLbl').textContent = 'الوصف';
     $('prev').hidden = true; $('photoBox').hidden = false; $('done').hidden = true;
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });

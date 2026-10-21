@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0B3D32">
 <meta name="robots" content="noindex">
-<title>لوحة متابعة البلاغات | المسجد الحرام</title>
-<link rel="icon" href="assets/logo.svg">
+<title>لوحة متابعة البلاغات الميدانية</title>
+<link rel="icon" href="assets/logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Noto+Kufi+Arabic:wght@600;700;800&display=swap" rel="stylesheet">
@@ -15,8 +15,10 @@
   body{min-height:100vh}
   .login{min-height:100vh;display:grid;place-items:center;padding:20px;
     background:linear-gradient(180deg,rgba(7,40,32,.6),rgba(11,61,50,.95)),url("assets/haram.jpg") center/cover}
-  .login form{background:var(--surface);border-radius:var(--r-lg);padding:30px 26px;width:min(390px,100%)}
-  .login img{width:54px;height:54px}
+  .login::before{content:"";position:fixed;inset:0;background:var(--pattern);background-size:80px;opacity:.55;pointer-events:none}
+  .login form{position:relative;background:var(--surface);border-radius:var(--r-lg);padding:30px 26px;width:min(390px,100%)}
+  .login img{height:84px;width:auto;display:block;margin:0 auto 6px}
+  .login h1,.login p.sub{text-align:center}
   .login h1{font-size:22px;margin:14px 0 4px}
   .login p{color:var(--muted);font-size:14px;margin:0 0 18px}
   .login label{display:block;font-size:14px;font-weight:600;margin:12px 0 6px}
@@ -24,10 +26,12 @@
   .login .err{color:var(--p-critical);font-size:14px;min-height:1.4em;margin:10px 0 0}
 
   .top{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;color:#fff;
-    background:linear-gradient(90deg,rgba(11,61,50,.97),rgba(11,61,50,.86)),url("assets/haram.jpg") center 40%/cover}
+    background:var(--pattern) 0 0/80px,linear-gradient(90deg,rgba(11,61,50,.97),rgba(11,61,50,.88)),url("assets/haram.jpg") center 40%/cover}
   body.app::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--green-900);z-index:11}
   .top-in{max-width:1360px;margin:0 auto;display:flex;align-items:center;gap:16px;padding:12px 20px}
-  .top img{width:38px;height:38px}
+  .top img{height:44px;width:auto}
+  .top::after{content:"";position:absolute;inset:auto 0 -7px;height:14px;background:var(--frieze) repeat-x center;pointer-events:none}
+  .top-in{position:relative}
   .t1{font-family:var(--display);font-weight:700;font-size:17px;line-height:1.2}
   .t2{font-size:12px;color:var(--gold-300)}
   .tabs{display:flex;gap:4px;margin-inline-start:auto;background:rgba(255,255,255,.1);padding:4px;border-radius:12px;overflow-x:auto;scrollbar-width:none}
@@ -38,7 +42,7 @@
   .live{display:flex;align-items:center;gap:6px;font-size:12px;color:#C7D6D0;white-space:nowrap}
   .live i{width:8px;height:8px;border-radius:50%;background:#5BD39B;box-shadow:0 0 0 4px rgba(91,211,155,.2)}
   .icon-btn{border:0;background:transparent;color:#fff;cursor:pointer;padding:6px;border-radius:8px;display:grid;place-items:center}
-  .wrap{max-width:1360px;margin:0 auto;padding:20px}
+  .wrap{max-width:1360px;margin:0 auto;padding:26px 20px 20px}
 
   .head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px;flex-wrap:wrap}
   .head h2{font-size:22px}
@@ -201,9 +205,9 @@
 
 <section class="login" id="login" hidden>
   <form id="loginForm">
-    <img src="assets/logo.svg" alt="">
+    <img src="assets/logo.png" alt="رئاسة الشؤون الدينية بالمسجد الحرام والمسجد النبوي">
     <h1>لوحة متابعة البلاغات</h1>
-    <p id="orgL"></p>
+    <p class="sub" id="orgL"></p>
     <label for="pw">كلمة المرور</label>
     <input id="pw" type="password" autocomplete="current-password" required>
     <label for="who">اسم المراجع <small style="color:var(--muted);font-weight:400">(يظهر في سجل البلاغ)</small></label>
@@ -216,8 +220,8 @@
 <div id="app" hidden>
   <header class="top">
     <div class="top-in">
-      <img src="assets/logo.svg" alt="">
-      <div><div class="t1">متابعة البلاغات الميدانية</div><div class="t2">المسجد الحرام</div></div>
+      <img src="assets/logo-light.png" alt="">
+      <div><div class="t1">متابعة البلاغات الميدانية</div><div class="t2" id="orgT"></div></div>
       <nav class="tabs" role="tablist" id="tabs"></nav>
       <div class="live" title="تحديث تلقائي كل 30 ثانية"><i></i><span id="sync">مباشر</span></div>
       <button class="icon-btn" id="logout" title="تسجيل الخروج" aria-label="تسجيل الخروج"></button>
@@ -283,7 +287,9 @@
 
       <div class="card" data-set="lists">
         <div class="cols3">
-          <div class="fld"><label for="oReporters">أسماء المُبلّغين</label><textarea id="oReporters"></textarea><p class="hint">اسم في كل سطر. تظهر للمُبلّغ قائمةً يختار منها اسمه.</p></div>
+          <div class="fld"><label for="oNameMode">خانة اسم المُبلّغ</label>
+            <select id="oNameMode" style="margin-bottom:10px"><option value="off">مخفية</option><option value="optional">اختيارية</option><option value="required">إلزامية</option></select>
+            <label for="oReporters">أسماء المُبلّغين</label><textarea id="oReporters" style="min-height:120px"></textarea><p class="hint">اسم في كل سطر فتظهر قائمةً يختار منها، أو اتركها فارغة ليكتب اسمه.</p></div>
           <div class="fld"><label for="oZones">المناطق</label><textarea id="oZones"></textarea><p class="hint">منطقة في كل سطر.</p></div>
           <div class="fld"><label for="oFloors">الأدوار</label><textarea id="oFloors"></textarea><p class="hint">دور في كل سطر.</p></div>
         </div>
@@ -357,7 +363,7 @@
   }
 
   // ================= الدخول والتنقل =================
-  $('orgL').textContent = C.ORG;
+  $('orgL').textContent = C.ORG; $('orgT').textContent = C.ORG;
   $('logout').innerHTML = ic('out'); $('sIc').innerHTML = ic('search'); $('sIc2').innerHTML = ic('search');
   $('expRep').innerHTML = ic('download') + 'تصدير Excel'; $('expLog').innerHTML = ic('download') + 'تصدير Excel';
   $('testMail').innerHTML = ic('mail') + 'إرسال رسالة تجربة';
@@ -628,7 +634,7 @@
     $('setNav').querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', b.dataset.v === setTab));
     document.querySelectorAll('[data-set]').forEach(c => c.hidden = c.dataset.set !== setTab);
     const o = S.opt, st = S.set;
-    $('oReporters').value = o.reporters.join('\n'); $('oZones').value = o.zones.join('\n'); $('oFloors').value = o.floors.join('\n'); $('oMethods').value = o.methods.join('\n');
+    $('oNameMode').value = o.name_mode || 'optional'; $('oReporters').value = o.reporters.join('\n'); $('oZones').value = o.zones.join('\n'); $('oFloors').value = o.floors.join('\n'); $('oMethods').value = o.methods.join('\n');
     renderCats(); renderEnts();
     $('mailState').innerHTML = S.emailReady ? `<div class="banner ok">${ic('check')}<span>خدمة البريد مفعّلة. أرسل رسالة تجربة للتأكد.</span></div>`
       : `<div class="banner warn">${ic('alert')}<span>خدمة البريد لم تُفعّل بعد في Cloudflare. احفظ الإعدادات الآن، وستبدأ الإشعارات تلقائياً بعد تفعيل Email Service وربطه بالمشروع.</span></div>`;
@@ -648,7 +654,7 @@
   $('catEd').addEventListener('click', e => { const b = e.target.closest('[data-del]'); if (!b) return; if (!confirm('حذف هذا النوع من القائمة؟ البلاغات السابقة تبقى كما هي.')) return; S.opt.categories.splice(+b.dataset.del, 1); renderCats(); });
   $('addCat').onclick = () => { S.opt.categories.push({ id: 'c' + Date.now(), label: '', entity: (S.ents[0] || {}).id || '', icon: 'dot', quick: [] }); renderCats(); $('catEd').lastElementChild.querySelector('input').focus(); };
   document.querySelectorAll('[data-save="options"]').forEach(b => b.onclick = async () => {
-    const o = { ...S.opt, reporters: lines('oReporters'), zones: lines('oZones'), floors: lines('oFloors'), methods: lines('oMethods') };
+    const o = { ...S.opt, name_mode: $('oNameMode').value, reporters: lines('oReporters'), zones: lines('oZones'), floors: lines('oFloors'), methods: lines('oMethods') };
     try { const d = await api('/api/settings', { method: 'PUT', body: JSON.stringify({ options: o }) }); S.opt = d.options; fillFilters(); toast('حُفظت التعديلات، وظهرت في صفحة البلاغ'); renderSettings(); } catch (e) { toast(e.message); }
   });
 

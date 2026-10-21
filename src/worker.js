@@ -2,6 +2,7 @@
 const DAY = 86400000, HOUR = 3600000, KSA = 3 * HOUR;
 const STATUSES = ['new', 'review', 'referred', 'closed'];
 const PRIORITIES = ['normal', 'urgent', 'critical'];
+const OPS_NAME = 'الإدارة العامة للعمليات بالشؤون الدينية';
 const PRIO_AR = { normal: 'عادي', urgent: 'عاجل', critical: 'حرج' };
 const STATUS_AR = { new: 'جديد', review: 'قيد المراجعة', referred: 'محال', closed: 'مغلق' };
 
@@ -11,6 +12,7 @@ const DEFAULT_OPTIONS = {
     'الساحة الشمالية', 'الساحة الجنوبية', 'الساحة الشرقية', 'الساحة الغربية', 'الجسور والممرات', 'السلالم والمصاعد', 'دورات المياه'],
   floors: ['القبو', 'الدور الأرضي', 'الدور الأول', 'الدور الثاني', 'السطح'],
   reporters: [],
+  name_mode: 'optional',                 // off | optional | required
   methods: ['تمت المعالجة ميدانياً', 'أُحيل وعالجته الجهة المختصة', 'لا يستدعي إجراء', 'بلاغ مكرر'],
   categories: [
     { id: 'security', label: 'ملاحظة أمنية', entity: 'security', icon: 'shield', quick: ['اشتباه بسلوك مخالف', 'افتراش في الممرات', 'باعة جائلون', 'تجمّع يعيق الحركة', 'تصوير مخالف'] },
@@ -124,7 +126,7 @@ async function publicOptions(env) {
   const o = await getConf(env, 'options');
   const { results } = await env.DB.prepare('SELECT id,name FROM entities').all();
   const names = Object.fromEntries(results.map(e => [e.id, e.name]));
-  return J({ zones: o.zones, floors: o.floors, reporters: o.reporters,
+  return J({ zones: o.zones, floors: o.floors, reporters: o.reporters, name_mode: o.name_mode,
     categories: o.categories.map(c => ({ ...c, entity_name: names[c.entity] || '' })) });
 }
 
@@ -331,7 +333,7 @@ async function saveSettings(req, env, url) {
     })).filter(c => c.label);
     const zones = cleanList(o.zones);
     if (!zones.length || !cats.length) return J({ error: 'يجب أن تبقى منطقة واحدة ونوع ملاحظة واحد على الأقل' }, 400);
-    await putConf(env, 'options', { zones, floors: cleanList(o.floors), reporters: cleanList(o.reporters, 500), methods: cleanList(o.methods, 40), categories: cats });
+    await putConf(env, 'options', { name_mode: ['off', 'optional', 'required'].includes(o.name_mode) ? o.name_mode : 'optional', zones, floors: cleanList(o.floors), reporters: cleanList(o.reporters, 500), methods: cleanList(o.methods, 40), categories: cats });
   }
   if (b.settings) {
     const cur = await getConf(env, 'settings'), v = b.settings;
@@ -348,16 +350,16 @@ async function sendMail(env, st, to, subject, html, text) {
   const from = st.mail_from || env.MAIL_FROM;
   if (!from) throw new Error('حدّد عنوان المرسل في إعدادات الإشعارات');
   if (!to.length) throw new Error('لا يوجد بريد مستلم');
-  return env.EMAIL.send({ from: { email: from, name: 'Bnder Notice' }, to, subject, html, text });
+  return env.EMAIL.send({ from: { email: from, name: OPS_NAME }, to, subject, html, text });
 }
 function mailHtml(title, rows, link, foot = '') {
   return `<div dir="rtl" style="font-family:Tahoma,Arial,sans-serif;background:#F1F4F3;padding:24px">
   <div style="max-width:560px;margin:auto;background:#fff;border-radius:12px;overflow:hidden;border:1px solid #D9E1DE">
-  <div style="background:#0B3D32;color:#fff;padding:18px 22px"><div style="color:#C9AE7A;font-size:12px">نظام البلاغات الميدانية — المسجد الحرام</div>
+  <div style="background:#0B3D32;color:#fff;padding:18px 22px"><div style="color:#C9AE7A;font-size:12px">${OPS_NAME} — البلاغات الميدانية</div>
   <div style="font-size:19px;font-weight:bold;margin-top:4px">${esc(title)}</div></div>
   <table style="width:100%;border-collapse:collapse;font-size:14px">${rows.filter(r => r[1]).map(([k, v]) =>
     `<tr><td style="padding:9px 22px;color:#5C6C66;width:120px;border-bottom:1px solid #EEF1F0">${esc(k)}</td><td style="padding:9px 22px;border-bottom:1px solid #EEF1F0">${esc(v)}</td></tr>`).join('')}</table>
-  ${foot}${link ? `<div style="padding:18px 22px"><a href="${esc(link)}" style="background:#0F4A3D;color:#fff;text-decoration:none;padding:10px 18px;border-radius:8px;display:inline-block">فتح في لوحة المتابعة</a></div>` : ''}
+  ${foot}<div style="padding:16px 22px 0;color:#5C6C66;font-size:13px">${OPS_NAME}</div>${link ? `<div style="padding:14px 22px 18px"><a href="${esc(link)}" style="background:#0F4A3D;color:#fff;text-decoration:none;padding:10px 18px;border-radius:8px;display:inline-block">فتح في لوحة المتابعة</a></div>` : ''}
   </div></div>`;
 }
 async function notify(env, type, id, origin, extra = {}) {
@@ -374,7 +376,7 @@ async function notify(env, type, id, origin, extra = {}) {
     ['الموقع', loc], ['وصف المكان', r.spot], ['التفاصيل', r.details], ['الجهة', r.ename], ['المُبلّغ', r.reporter_name], ['وقت الرصد', fmt(r.created_at)],
     ['الإجراء', extra.note], ['بواسطة', extra.actor]];
   const link = `${origin || st.site_url}/admin#r${id}`;
-  await sendMail(env, st, to, subj, mailHtml(titles[type], rows, link), rows.filter(x => x[1]).map(x => x.join(': ')).join('\n') + '\n' + link);
+  await sendMail(env, st, to, subj, mailHtml(titles[type], rows, link), rows.filter(x => x[1]).map(x => x.join(': ')).join('\n') + '\n' + link + '\n\n' + OPS_NAME);
 }
 async function sendDigest(env) {
   const st = await getConf(env, 'settings'), n = st.notify.digest;
@@ -387,12 +389,12 @@ async function sendDigest(env) {
   const foot = `<table style="width:100%;border-collapse:collapse;font-size:13px">${results.map(r =>
     `<tr><td style="padding:8px 22px;border-bottom:1px solid #EEF1F0">${esc(r.ref)}</td><td style="padding:8px;border-bottom:1px solid #EEF1F0">${esc(r.category_label)} — ${esc(r.zone)}</td><td style="padding:8px 22px;border-bottom:1px solid #EEF1F0;color:#B3261E;white-space:nowrap">متأخر ${days(r)} يوم</td></tr>`).join('')}</table>`;
   await sendMail(env, st, to, `ملخص البلاغات المتأخرة: ${results.length}`, mailHtml(`${results.length} بلاغ تجاوز مهلة المعالجة`, [], `${st.site_url}/admin`, foot),
-    results.map(r => `${r.ref} | ${r.category_label} | ${r.zone} | متأخر ${days(r)} يوم`).join('\n'));
+    results.map(r => `${r.ref} | ${r.category_label} | ${r.zone} | متأخر ${days(r)} يوم`).join('\n') + '\n\n' + OPS_NAME);
 }
 async function testEmail(env) {
   const st = await getConf(env, 'settings');
   try {
-    await sendMail(env, st, emails(st.mail_to), 'رسالة تجربة من نظام البلاغات الميدانية', mailHtml('تم ربط الإشعارات بنجاح', [['الوقت', fmt(Date.now())]], `${st.site_url}/admin`), 'تم ربط الإشعارات بنجاح');
+    await sendMail(env, st, emails(st.mail_to), 'رسالة تجربة من نظام البلاغات الميدانية', mailHtml('تم ربط الإشعارات بنجاح', [['الوقت', fmt(Date.now())]], `${st.site_url}/admin`), 'تم ربط الإشعارات بنجاح\n\n' + OPS_NAME);
     return J({ ok: true });
   } catch (e) { return J({ error: e.message || 'تعذّر الإرسال' }, 400); }
 }

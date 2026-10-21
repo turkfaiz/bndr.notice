@@ -8,7 +8,8 @@
   --r-sm:8px; --r-md:12px; --r-lg:18px;
   --font:'IBM Plex Sans Arabic', 'Segoe UI', Tahoma, sans-serif;
   --display:'Noto Kufi Arabic', 'IBM Plex Sans Arabic', Tahoma, sans-serif;
-  --pattern:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='56' viewBox='0 0 56 56'%3E%3Cg fill='none' stroke='%23C9AE7A' stroke-opacity='.18'%3E%3Crect x='16' y='16' width='24' height='24'/%3E%3Crect x='16' y='16' width='24' height='24' transform='rotate(45 28 28)'/%3E%3Cpath d='M0 28h7M49 28h7M28 0v7M28 49v7'/%3E%3C/g%3E%3C/svg%3E");
+  --pattern:url("/assets/pattern.svg");
+  --frieze:url("/assets/frieze.svg");
   color-scheme: light;
   box-sizing:border-box;
   padding-top:env(safe-area-inset-top,0px);

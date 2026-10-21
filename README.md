@@ -30,4 +30,4 @@
 - `SESSION_SECRET` (اختياري): نص عشوائي يقوّي الجلسات وروابط الصور.
 
 ## الهوية
-الشعار: `public/assets/logo.svg` — صورة الهيدر: `public/assets/haram.jpg` — الألوان والخطوط: `public/assets/theme.css`
+الشعار: `public/assets/logo.png` (والنسخة الفاتحة للخلفيات الداكنة `logo-light.png`) — صورة الهيدر: `public/assets/haram.jpg` — الألوان والخطوط: `public/assets/theme.css`
