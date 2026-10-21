@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS reports (
   reporter_name TEXT, reporter_phone TEXT,
   has_photo INTEGER DEFAULT 0,
   status TEXT DEFAULT 'new',
-  referred_at INTEGER, closed_at INTEGER, closure_note TEXT
+  referred_at INTEGER, closed_at INTEGER, closure_method TEXT, closure_note TEXT
 );
 CREATE INDEX IF NOT EXISTS idx_reports_created ON reports(created_at);
 CREATE INDEX IF NOT EXISTS idx_reports_status ON reports(status);
@@ -29,6 +29,13 @@ CREATE TABLE IF NOT EXISTS events (
   action TEXT, note TEXT, actor TEXT
 );
 CREATE INDEX IF NOT EXISTS idx_events_report ON events(report_id);
+CREATE INDEX IF NOT EXISTS idx_events_at ON events(at);
+
+-- الخيارات والإعدادات (تُدار من لوحة التحكم)
+CREATE TABLE IF NOT EXISTS config (
+  key TEXT PRIMARY KEY,
+  value TEXT NOT NULL
+);
 
 CREATE TABLE IF NOT EXISTS entities (
   id TEXT PRIMARY KEY,

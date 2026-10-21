@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0B3D32">
 <meta name="robots" content="noindex">
-<title>لوحة متابعة البلاغات | Bnder Notice</title>
+<title>لوحة متابعة البلاغات | المسجد الحرام</title>
 <link rel="icon" href="assets/logo.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,112 +13,135 @@
 <link rel="stylesheet" href="assets/theme.css">
 <style>
   body{min-height:100vh}
-  /* ---------- الدخول ---------- */
-  .login{min-height:100vh;display:grid;place-items:center;background:var(--green-900) var(--pattern);padding:20px}
-  .login form{background:var(--surface);border-radius:var(--r-lg);padding:30px 26px;width:min(380px,100%)}
-  .login img{width:56px;height:56px}
+  .login{min-height:100vh;display:grid;place-items:center;padding:20px;
+    background:linear-gradient(180deg,rgba(7,40,32,.6),rgba(11,61,50,.95)),url("assets/haram.jpg") center/cover}
+  .login form{background:var(--surface);border-radius:var(--r-lg);padding:30px 26px;width:min(390px,100%)}
+  .login img{width:54px;height:54px}
   .login h1{font-size:22px;margin:14px 0 4px}
-  .login p{color:var(--muted);font-size:14px;margin:0 0 20px}
-  .login .btn{width:100%;margin-top:12px}
+  .login p{color:var(--muted);font-size:14px;margin:0 0 18px}
+  .login label{display:block;font-size:14px;font-weight:600;margin:12px 0 6px}
+  .login .btn{width:100%;margin-top:16px}
   .login .err{color:var(--p-critical);font-size:14px;min-height:1.4em;margin:10px 0 0}
 
-  /* ---------- الهيكل ---------- */
-  .top{background:var(--green-900) var(--pattern);color:#fff;position:sticky;top:env(safe-area-inset-top,0px);z-index:10}
+  .top{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;color:#fff;
+    background:linear-gradient(90deg,rgba(11,61,50,.97),rgba(11,61,50,.86)),url("assets/haram.jpg") center 40%/cover}
   body.app::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--green-900);z-index:11}
-  .top-in{max-width:1320px;margin:0 auto;display:flex;align-items:center;gap:16px;padding:12px 20px}
+  .top-in{max-width:1360px;margin:0 auto;display:flex;align-items:center;gap:16px;padding:12px 20px}
   .top img{width:38px;height:38px}
-  .top .t1{font-family:var(--display);font-weight:700;font-size:17px;line-height:1.2}
-  .top .t2{font-size:12px;color:var(--gold-300)}
-  .tabs{display:flex;gap:4px;margin-inline-start:auto;background:rgba(255,255,255,.08);padding:4px;border-radius:12px}
-  .tabs button{border:0;background:transparent;color:#D5E3DD;padding:8px 14px;border-radius:9px;cursor:pointer;font-weight:600;display:flex;gap:6px;align-items:center}
+  .t1{font-family:var(--display);font-weight:700;font-size:17px;line-height:1.2}
+  .t2{font-size:12px;color:var(--gold-300)}
+  .tabs{display:flex;gap:4px;margin-inline-start:auto;background:rgba(255,255,255,.1);padding:4px;border-radius:12px;overflow-x:auto;scrollbar-width:none}
+  .tabs button{border:0;background:transparent;color:#D5E3DD;padding:8px 13px;border-radius:9px;cursor:pointer;font-weight:600;display:flex;gap:6px;align-items:center;white-space:nowrap}
+  .tabs button .ic{width:17px;height:17px}
   .tabs button[aria-selected="true"]{background:#fff;color:var(--green-900)}
-  .tabs .cnt{background:var(--st-new);color:#fff;border-radius:999px;font-size:12px;padding:0 7px;min-width:20px;text-align:center}
-  .live{display:flex;align-items:center;gap:6px;font-size:12px;color:#C7D6D0}
+  .cnt{background:var(--st-new);color:#fff;border-radius:999px;font-size:12px;padding:0 7px;min-width:20px;text-align:center}
+  .live{display:flex;align-items:center;gap:6px;font-size:12px;color:#C7D6D0;white-space:nowrap}
   .live i{width:8px;height:8px;border-radius:50%;background:#5BD39B;box-shadow:0 0 0 4px rgba(91,211,155,.2)}
   .icon-btn{border:0;background:transparent;color:#fff;cursor:pointer;padding:6px;border-radius:8px;display:grid;place-items:center}
-  .wrap{max-width:1320px;margin:0 auto;padding:20px}
-  .view[hidden]{display:none}
+  .wrap{max-width:1360px;margin:0 auto;padding:20px}
 
-  /* ---------- المؤشرات ---------- */
-  .dash-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px;flex-wrap:wrap}
-  .dash-head h2{font-size:22px}
-  .seg{display:inline-flex;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:3px;gap:2px}
-  .seg button{border:0;background:transparent;padding:7px 14px;border-radius:9px;cursor:pointer;font-weight:600;font-size:14px}
+  .head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px;flex-wrap:wrap}
+  .head h2{font-size:22px}
+  .head p{margin:2px 0 0;color:var(--muted);font-size:14px}
+  .seg{display:inline-flex;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:3px;gap:2px;flex-wrap:wrap}
+  .seg button{border:0;background:transparent;padding:7px 13px;border-radius:9px;cursor:pointer;font-weight:600;font-size:14px}
   .seg button[aria-pressed="true"]{background:var(--green-800);color:#fff}
-  .kpis{display:grid;grid-template-columns:2fr repeat(4,1fr);gap:12px;margin-bottom:12px}
-  .kpi{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-md);padding:16px 18px;display:flex;flex-direction:column;justify-content:space-between;gap:8px;cursor:default}
-  .kpi[data-go]{cursor:pointer}
-  .kpi[data-go]:hover{border-color:var(--green-700)}
+
+  .kpis{display:grid;grid-template-columns:1.6fr repeat(5,1fr);gap:12px;margin-bottom:12px}
+  .kpi{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-md);padding:15px 16px;display:flex;flex-direction:column;justify-content:space-between;gap:8px}
+  .kpi[data-go]{cursor:pointer}.kpi[data-go]:hover{border-color:var(--green-700)}
   .kpi span{font-size:13.5px;color:var(--muted);display:flex;align-items:center;gap:8px}
   .kpi span i{width:9px;height:9px;border-radius:50%}
   .kpi b{font-family:var(--display);font-size:30px;font-weight:700;line-height:1.1}
+  .kpi small{font-size:12.5px;color:var(--muted)}
   .kpi.lead{background:var(--green-800);border-color:var(--green-800);color:#fff}
-  .kpi.lead span{color:#C7D6D0}
-  .kpi.lead b{font-size:44px}
-  .kpi.lead .meter{height:8px;border-radius:99px;background:rgba(255,255,255,.15);overflow:hidden}
-  .kpi.lead .meter div{height:100%;background:var(--gold-300)}
-  .kpi.lead small{color:#C7D6D0;font-size:13px}
+  .kpi.lead span,.kpi.lead small{color:#C7D6D0}
+  .kpi.lead b{font-size:42px}
+  .meter{height:8px;border-radius:99px;background:rgba(255,255,255,.15);overflow:hidden}
+  .meter div{height:100%;background:var(--gold-300)}
+  .kpi.bad{border-color:#F0C9C5;background:#FDF3F2}
+  .kpi.bad b{color:var(--p-critical)}
   .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:12px}
   .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-md);padding:18px;min-width:0}
   .card h3{font-size:15px;margin-bottom:14px;display:flex;justify-content:space-between;align-items:baseline;gap:8px}
   .card h3 small{font-family:var(--font);font-weight:400;font-size:12.5px;color:var(--muted)}
-  .c8{grid-column:span 8}.c4{grid-column:span 4}.c6{grid-column:span 6}
+  .c8{grid-column:span 8}.c4{grid-column:span 4}.c6{grid-column:span 6}.c12{grid-column:span 12}
   .hb{display:grid;grid-template-columns:minmax(90px,38%) 1fr auto;gap:8px 10px;align-items:center;font-size:14px}
   .hb .tr{height:10px;background:var(--marble);border-radius:99px;overflow:hidden;display:flex}
-  .hb .tr div{height:100%}
   .hb .lab{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .hb .v{font-weight:700;min-width:28px;text-align:end}
   .legend{display:flex;gap:14px;font-size:12.5px;color:var(--muted);margin-top:12px}
   .legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-inline-end:5px;vertical-align:-1px}
   .chart svg{width:100%;height:auto;display:block}
   .chart text{font-family:var(--font);font-size:11px;fill:var(--muted)}
-  .alerts{display:flex;flex-direction:column;gap:10px}
-  .alerts .a{display:flex;justify-content:space-between;align-items:center;padding:10px 12px;border-radius:10px;background:var(--marble);font-size:14px}
-  .alerts .a b{font-family:var(--display);font-size:20px}
+  .aging{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+  .aging div{border-radius:10px;padding:12px;background:var(--marble);text-align:center}
+  .aging b{display:block;font-family:var(--display);font-size:26px}
+  .aging span{font-size:12.5px;color:var(--muted)}
+  .aging .a3{background:#FDF3F2}.aging .a3 b{color:var(--p-critical)}
+  .aging .a2 b{color:var(--p-urgent)}
+  .mini{width:100%;border-collapse:collapse;font-size:14px}
+  .mini td{padding:9px 6px;border-top:1px solid var(--line)}
+  .mini tr{cursor:pointer}.mini tr:hover td{background:#F7F9F8}
+  .mini .late{color:var(--p-critical);font-weight:700;white-space:nowrap;text-align:end}
+  .feed{list-style:none;margin:0;padding:0}
+  .feed li{display:flex;gap:10px;padding:9px 0;border-top:1px solid var(--line);font-size:13.5px;cursor:pointer}
+  .feed li:first-child{border-top:0}
+  .feed small{color:var(--muted);display:block}
+  .dotc{width:9px;height:9px;border-radius:50%;margin-top:7px;flex:none}
   .empty{color:var(--muted);font-size:14px;padding:18px 0;text-align:center}
 
-  /* ---------- البلاغات ---------- */
+  .st-tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+  .st-tabs button{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 14px;cursor:pointer;font-weight:600;font-size:14px;display:flex;gap:8px;align-items:center}
+  .st-tabs button b{color:var(--muted)}
+  .st-tabs button[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:#fff}
+  .st-tabs button[aria-pressed="true"] b{color:var(--gold-300)}
+  .st-tabs button.od{color:var(--p-critical)}
   .filters{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:14px}
   .filters .search{flex:1 1 240px;position:relative}
   .filters .search .ic{position:absolute;inset-inline-start:12px;top:13px;color:var(--muted)}
   .filters .search input{padding-inline-start:40px}
-  .filters select{width:auto;min-width:150px}
-  .st-tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
-  .st-tabs button{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 14px;cursor:pointer;font-weight:600;font-size:14px;display:flex;gap:8px;align-items:center}
-  .st-tabs button b{font-weight:700;color:var(--muted)}
-  .st-tabs button[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:#fff}
-  .st-tabs button[aria-pressed="true"] b{color:var(--gold-300)}
+  .filters select{width:auto;min-width:140px}
   .list{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-md);overflow:hidden}
-  .row{display:grid;grid-template-columns:92px 1.3fr 1.6fr 110px 96px 118px;gap:12px;align-items:center;padding:13px 16px;border-top:1px solid var(--line);cursor:pointer;font-size:14.5px}
+  .row{display:grid;grid-template-columns:90px 1.2fr 1.6fr 1fr 96px 112px 120px;gap:12px;align-items:center;padding:12px 16px;border-top:1px solid var(--line);cursor:pointer;font-size:14.5px}
   .row:first-child{border-top:0}
   .row:hover{background:#F7F9F8}
   .row.fresh{background:var(--gold-100)}
-  .row.head{background:var(--marble);font-size:12.5px;color:var(--muted);cursor:default;font-weight:600}
+  .row.hd{background:var(--marble);font-size:12.5px;color:var(--muted);cursor:default;font-weight:600}
   .row .ref{font-weight:700;direction:ltr;text-align:end;color:var(--green-800)}
   .row .cat{display:flex;align-items:center;gap:8px;font-weight:600;min-width:0}
   .row .cat .ic{color:var(--green-700)}
-  .row .loc{color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  .row .loc .pic{display:inline-flex;vertical-align:-4px;color:var(--gold)}
-  .row .tm{color:var(--muted);font-size:13px}
+  .row .loc,.row .who{color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .row .pic{display:inline-flex;vertical-align:-4px;color:var(--gold)}
+  .age{font-size:13px;color:var(--muted)}
+  .age.late{color:var(--p-critical);font-weight:700}
   .more{padding:10px;text-align:center;font-size:13px;color:var(--muted)}
 
-  /* ---------- تفاصيل البلاغ ---------- */
+  .logt{width:100%;border-collapse:collapse;font-size:14px;background:var(--surface)}
+  .logt th{background:var(--marble);color:var(--muted);font-size:12.5px;font-weight:600;text-align:start;padding:10px 14px}
+  .logt td{padding:10px 14px;border-top:1px solid var(--line);vertical-align:top}
+  .logt tr.cl{cursor:pointer}.logt tr.cl:hover td{background:#F7F9F8}
+  .tw{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-md);overflow:auto}
+  .act-b{display:inline-block;font-size:12.5px;font-weight:600;padding:2px 9px;border-radius:999px;background:var(--marble);white-space:nowrap}
+
+  /* تفاصيل البلاغ */
   .scrim{position:fixed;inset:0;background:rgba(20,37,31,.45);z-index:30}
   .drawer{position:fixed;top:0;bottom:0;inset-inline-end:0;width:min(560px,100%);background:var(--marble);z-index:31;display:flex;flex-direction:column;animation:slide .22s ease-out;padding-top:env(safe-area-inset-top,0px)}
   @keyframes slide{from{transform:translateX(-30px);opacity:.4}to{transform:none;opacity:1}}
   .d-head{background:var(--surface);padding:16px 20px;border-bottom:1px solid var(--line);display:flex;align-items:flex-start;gap:12px}
   .d-head h2{font-size:19px}
-  .d-head .meta{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
-  .d-head .close{margin-inline-start:auto;border:1px solid var(--line);background:var(--surface);border-radius:10px;width:40px;height:40px;display:grid;place-items:center;cursor:pointer}
+  .meta{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
+  .close{margin-inline-start:auto;border:1px solid var(--line);background:var(--surface);border-radius:10px;width:40px;height:40px;display:grid;place-items:center;cursor:pointer;flex:none}
   .d-body{overflow:auto;padding:16px 20px 30px;flex:1}
   .d-photo{border-radius:var(--r-md);overflow:hidden;background:#dfe5e3;margin-bottom:12px;cursor:zoom-in}
   .d-photo img{width:100%;max-height:300px;object-fit:cover;display:block}
   .blk{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-md);padding:14px 16px;margin-bottom:12px}
   .blk h4{margin:0 0 10px;font-size:13px;color:var(--muted);font-weight:600}
-  .kv{display:grid;grid-template-columns:110px 1fr;gap:6px 12px;font-size:14.5px}
+  .blk.done{border-color:#BFDCCB;background:#F3FAF6}
+  .kv{display:grid;grid-template-columns:110px 1fr;gap:6px 12px;font-size:14.5px;margin:0}
   .kv dt{color:var(--muted)} .kv dd{margin:0;font-weight:500}
-  .loc-line{font-family:var(--display);font-size:16px;font-weight:600;margin-bottom:10px}
-  .maplink{display:inline-flex;gap:6px;align-items:center;color:var(--green-800);font-weight:600;text-decoration:none;margin-top:10px}
+  .loc-line{font-family:var(--display);font-size:16px;font-weight:600;margin-bottom:6px}
+  .maplink{display:inline-flex;gap:6px;align-items:center;color:var(--green-800);font-weight:600;text-decoration:none;margin-top:8px}
   .details{white-space:pre-line;font-size:15px}
   .tl{list-style:none;margin:0;padding:0}
   .tl li{position:relative;padding:0 22px 14px 0;font-size:14px}
@@ -130,63 +153,72 @@
   .act-tabs{display:flex;gap:6px;margin-bottom:12px}
   .act-tabs button{flex:1;border:1px solid var(--line);background:var(--surface);border-radius:10px;padding:9px;cursor:pointer;font-weight:600;font-size:14px}
   .act-tabs button[aria-pressed="true"]{border-color:var(--green-800);background:var(--green-100);color:var(--green-900)}
-  .act-panel textarea{min-height:90px;font-size:14px}
+  .act-panel textarea{min-height:84px;font-size:14px}
+  .act-panel select{margin-bottom:8px}
   .act-panel .btns{display:flex;gap:8px;margin-top:10px}
   .act-panel .btns .btn{flex:1}
-  .act-panel select{margin-bottom:8px}
   .warn{font-size:13px;color:var(--p-urgent);margin:6px 0 0}
   .lightbox{position:fixed;inset:0;background:rgba(0,0,0,.9);z-index:40;display:grid;place-items:center;padding:20px;cursor:zoom-out}
   .lightbox img{max-width:100%;max-height:100%}
 
-  /* ---------- الجهات ---------- */
-  .ent{display:grid;grid-template-columns:1.4fr 1fr 90px 40px;gap:10px;align-items:center;padding:10px 0;border-top:1px solid var(--line)}
-  .ent:first-of-type{border-top:0}
-  .ent.head{font-size:12.5px;color:var(--muted);font-weight:600}
-  .switch{display:flex;align-items:center;gap:6px;font-size:13px;cursor:pointer}
+  /* الإعدادات */
+  .set-nav{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+  .fld{margin-bottom:16px}
+  .fld label{display:block;font-weight:600;font-size:14px;margin-bottom:6px}
+  .fld .hint{font-size:13px;color:var(--muted);margin:4px 0 0}
+  .fld textarea{min-height:180px;font-size:14.5px;line-height:1.9}
+  .cols3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  .cat-ed{border:1px solid var(--line);border-radius:var(--r-md);padding:12px;margin-bottom:10px;display:grid;grid-template-columns:1fr 1fr 40px;gap:10px;align-items:start}
+  .cat-ed textarea{grid-column:1/3;min-height:90px;font-size:14px}
+  .del{border:1px solid var(--line);background:var(--surface);border-radius:10px;width:40px;height:46px;display:grid;place-items:center;cursor:pointer;color:var(--p-critical)}
+  .ent{display:grid;grid-template-columns:1.4fr 1fr 110px;gap:10px;align-items:center;padding:10px 0;border-top:1px solid var(--line)}
+  .ent.hd{font-size:12.5px;color:var(--muted);font-weight:600;border-top:0}
+  .switch{display:flex;align-items:center;gap:8px;font-size:14px;cursor:pointer}
   .switch input{width:18px;height:18px;accent-color:var(--green-800)}
+  .ntf{display:grid;grid-template-columns:1.2fr 90px 1.6fr;gap:12px;align-items:center;padding:12px 0;border-top:1px solid var(--line)}
+  .ntf small{display:block;color:var(--muted);font-size:12.5px}
+  .banner{display:flex;gap:10px;align-items:flex-start;padding:12px 14px;border-radius:10px;font-size:14px;margin-bottom:14px}
+  .banner.warn{background:#FBF1E0;color:#7A5212}
+  .banner.ok{background:#E3F1EA;color:var(--st-closed)}
+  .savebar{display:flex;justify-content:flex-end;gap:8px;margin-top:6px}
   .toast{position:fixed;bottom:calc(20px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;padding:11px 18px;border-radius:12px;z-index:50;font-size:14px;font-weight:600}
 
-  @media (max-width:1100px){.kpis{grid-template-columns:repeat(3,1fr)}.kpi.lead{grid-column:span 3}.c8,.c4,.c6{grid-column:span 12}}
-  @media (max-width:820px){
-    .top-in{flex-wrap:wrap;padding:10px 14px}.tabs{order:3;width:100%;margin:0}.tabs button{flex:1;justify-content:center}
+  @media (max-width:1200px){.kpis{grid-template-columns:repeat(3,1fr)}.kpi.lead{grid-column:span 3}.c8,.c4,.c6{grid-column:span 12}}
+  @media (max-width:860px){
+    .top-in{flex-wrap:wrap;padding:10px 14px}.tabs{order:3;width:100%;margin:0}
     .live{margin-inline-start:auto}.wrap{padding:14px}
     .kpis{grid-template-columns:1fr 1fr}.kpi.lead{grid-column:span 2}
-    .row.head{display:none}
-    .row{grid-template-columns:1fr auto;grid-template-areas:"cat st" "loc pr" "ref tm";gap:4px 10px}
+    .row.hd{display:none}
+    .row{grid-template-columns:1fr auto;grid-template-areas:"cat st" "loc pr" "ref age";gap:4px 10px}
     .row .ref{grid-area:ref;text-align:start;direction:rtl;font-size:13px}.row .cat{grid-area:cat}.row .loc{grid-area:loc}
-    .row .tm{grid-area:tm;text-align:end}.row .pr{grid-area:pr;justify-self:end}.row .st{grid-area:st;justify-self:end}
-    .ent{grid-template-columns:1fr 1fr;}.ent.head{display:none}
+    .row .age{grid-area:age;text-align:end}.row .pr{grid-area:pr;justify-self:end}.row .st{grid-area:st;justify-self:end}.row .who{display:none}
+    .cols3,.aging{grid-template-columns:1fr 1fr}.ent,.ntf{grid-template-columns:1fr 1fr}.ntf input[type=text]{grid-column:1/3}
+    .cat-ed{grid-template-columns:1fr 40px}.cat-ed textarea,.cat-ed select{grid-column:1/2}
   }
 </style>
 </head>
 <body>
 
-<!-- ======== الدخول ======== -->
 <section class="login" id="login" hidden>
   <form id="loginForm">
     <img src="assets/logo.svg" alt="">
     <h1>لوحة متابعة البلاغات</h1>
     <p id="orgL"></p>
-    <label for="pw" class="lbl" style="display:block;font-size:14px;font-weight:600;margin-bottom:6px">كلمة المرور</label>
+    <label for="pw">كلمة المرور</label>
     <input id="pw" type="password" autocomplete="current-password" required>
-    <label for="who" style="display:block;font-size:14px;font-weight:600;margin:12px 0 6px">اسم المراجع <span style="color:var(--muted);font-weight:400">(يظهر في سجل البلاغ)</span></label>
+    <label for="who">اسم المراجع <small style="color:var(--muted);font-weight:400">(يظهر في سجل البلاغ)</small></label>
     <input id="who" autocomplete="name">
     <button class="btn primary" type="submit">دخول</button>
     <p class="err" id="lErr" role="alert"></p>
   </form>
 </section>
 
-<!-- ======== التطبيق ======== -->
 <div id="app" hidden>
   <header class="top">
     <div class="top-in">
       <img src="assets/logo.svg" alt="">
-      <div><div class="t1">متابعة البلاغات الميدانية</div><div class="t2" id="orgT"></div></div>
-      <nav class="tabs" role="tablist">
-        <button role="tab" data-view="dash" aria-selected="true">المؤشرات</button>
-        <button role="tab" data-view="reports" aria-selected="false">البلاغات <span class="cnt" id="newCnt" hidden></span></button>
-        <button role="tab" data-view="entities" aria-selected="false">الجهات</button>
-      </nav>
+      <div><div class="t1">متابعة البلاغات الميدانية</div><div class="t2">المسجد الحرام</div></div>
+      <nav class="tabs" role="tablist" id="tabs"></nav>
       <div class="live" title="تحديث تلقائي كل 30 ثانية"><i></i><span id="sync">مباشر</span></div>
       <button class="icon-btn" id="logout" title="تسجيل الخروج" aria-label="تسجيل الخروج"></button>
     </div>
@@ -195,45 +227,96 @@
   <main class="wrap">
     <!-- المؤشرات -->
     <section class="view" id="v-dash">
-      <div class="dash-head">
-        <h2>نظرة عامة</h2>
-        <div class="seg" id="range">
-          <button data-v="today">اليوم</button><button data-v="7">7 أيام</button><button data-v="30" aria-pressed="true">30 يوماً</button><button data-v="all">الكل</button>
-        </div>
-      </div>
+      <div class="head"><div><h2>لوحة المؤشرات</h2><p id="dashSub"></p></div>
+        <div class="seg" id="range"><button data-v="today">اليوم</button><button data-v="7">7 أيام</button><button data-v="30" aria-pressed="true">30 يوماً</button><button data-v="90">90 يوماً</button><button data-v="all">الكل</button></div></div>
       <div class="kpis" id="kpis"></div>
       <div class="grid">
-        <div class="card c8 chart"><h3>البلاغات خلال 14 يوماً <small>الواردة والمغلقة</small></h3><div id="trend"></div>
+        <div class="card c6"><h3>أعمار البلاغات المفتوحة <small>منذ الرصد</small></h3><div class="aging" id="aging"></div>
+          <h3 style="margin-top:18px">المتأخرة عن مهلة المعالجة <small id="slaTxt"></small></h3><div id="overdue"></div></div>
+        <div class="card c6 chart"><h3>البلاغات خلال 14 يوماً <small>الواردة والمغلقة</small></h3><div id="trend"></div>
           <div class="legend"><span><i style="background:var(--green-700)"></i>واردة</span><span><i style="background:var(--gold-300)"></i>مغلقة</span></div></div>
-        <div class="card c4"><h3>تحتاج انتباهك</h3><div class="alerts" id="alerts"></div></div>
-        <div class="card c6"><h3>حسب الجهة <small>المغلق من الإجمالي</small></h3><div id="byEntity"></div></div>
-        <div class="card c6"><h3>أنواع الملاحظات</h3><div id="byCat"></div></div>
-        <div class="card c6"><h3>أكثر المناطق بلاغاً</h3><div id="byZone"></div></div>
-        <div class="card c6 chart"><h3>ساعات الذروة <small>بتوقيت مكة</small></h3><div id="hours"></div></div>
+        <div class="card c4"><h3>حسب الجهة <small>المغلق من الإجمالي</small></h3><div id="byEntity"></div></div>
+        <div class="card c4"><h3>أنواع الملاحظات</h3><div id="byCat"></div></div>
+        <div class="card c4"><h3>أكثر المناطق بلاغاً</h3><div id="byZone"></div></div>
+        <div class="card c4"><h3>طرق المعالجة</h3><div id="byMethod"></div></div>
+        <div class="card c4 chart"><h3>ساعات الذروة <small>بتوقيت مكة</small></h3><div id="hours"></div></div>
+        <div class="card c4"><h3>آخر الحركات <small><a href="#" id="toLog" style="color:var(--green-800)">السجل الكامل</a></small></h3><ul class="feed" id="recent"></ul></div>
       </div>
     </section>
 
-    <!-- البلاغات -->
+    <!-- الجديدة -->
+    <section class="view" id="v-new" hidden>
+      <div class="head"><div><h2>الواردة الجديدة</h2><p>بلاغات لم تُفتح بعد، الأقدم أولاً. فتح البلاغ ينقله إلى «قيد المراجعة».</p></div></div>
+      <div class="list" id="newList"></div>
+    </section>
+
+    <!-- كل البلاغات -->
     <section class="view" id="v-reports" hidden>
+      <div class="head"><div><h2>البلاغات</h2></div><button class="btn" id="expRep"></button></div>
       <div class="st-tabs" id="stTabs"></div>
       <div class="filters">
-        <div class="search"><span id="sIc"></span><input id="q" type="search" placeholder="ابحث برقم البلاغ أو المكان أو الوصف"></div>
-        <select id="fMosque"><option value="">كل المساجد</option></select>
+        <div class="search"><span id="sIc"></span><input id="q" type="search" placeholder="ابحث برقم البلاغ أو المكان أو الوصف أو المُبلّغ"></div>
+        <select id="fZone"><option value="">كل المناطق</option></select>
+        <select id="fCat"><option value="">كل الأنواع</option></select>
         <select id="fEntity"><option value="">كل الجهات</option></select>
         <select id="fPrio"><option value="">كل الأولويات</option></select>
-        <select id="fRange"><option value="">كل الفترات</option><option value="today">اليوم</option><option value="7">آخر 7 أيام</option><option value="30">آخر 30 يوماً</option></select>
+        <select id="fRange"><option value="">كل الفترات</option><option value="today">اليوم</option><option value="7">آخر 7 أيام</option><option value="30">آخر 30 يوماً</option><option value="90">آخر 90 يوماً</option></select>
       </div>
       <div class="list" id="list"></div>
     </section>
 
-    <!-- الجهات -->
-    <section class="view" id="v-entities" hidden>
-      <div class="dash-head"><h2>الجهات وأرقام واتساب</h2><button class="btn" id="addEnt">إضافة جهة</button></div>
-      <div class="card">
-        <p style="margin:0 0 12px;color:var(--muted);font-size:14px">يُستخدم الرقم عند إحالة البلاغ، فتُفتح محادثة واتساب مع الجهة والرسالة جاهزة. اكتب الرقم بصيغة 05xxxxxxxx أو 9665xxxxxxxx.</p>
-        <div class="ent head"><span>اسم الجهة</span><span>رقم واتساب</span><span>مفعّلة</span><span></span></div>
+    <!-- السجل -->
+    <section class="view" id="v-log" hidden>
+      <div class="head"><div><h2>سجل الحركات</h2><p>كل إجراء على أي بلاغ: الاستلام، المراجعة، الإحالة، الإقفال، الملاحظات.</p></div><button class="btn" id="expLog"></button></div>
+      <div class="filters">
+        <div class="search"><span id="sIc2"></span><input id="lq" type="search" placeholder="ابحث برقم البلاغ أو اسم المنفّذ أو النص"></div>
+        <select id="lAct"><option value="">كل الإجراءات</option></select>
+        <select id="lRange"><option value="today">اليوم</option><option value="7" selected>آخر 7 أيام</option><option value="30">آخر 30 يوماً</option><option value="90">آخر 90 يوماً</option><option value="">الكل</option></select>
+      </div>
+      <div class="tw"><table class="logt"><thead><tr><th>الوقت</th><th>البلاغ</th><th>الإجراء</th><th>التفاصيل</th><th>بواسطة</th></tr></thead><tbody id="logBody"></tbody></table></div>
+    </section>
+
+    <!-- الإعدادات -->
+    <section class="view" id="v-settings" hidden>
+      <div class="head"><div><h2>الإعدادات</h2><p>كل ما يظهر في صفحة البلاغ يُدار من هنا ويُحفظ في قاعدة البيانات.</p></div></div>
+      <div class="set-nav st-tabs" id="setNav"></div>
+
+      <div class="card" data-set="lists">
+        <div class="cols3">
+          <div class="fld"><label for="oReporters">أسماء المُبلّغين</label><textarea id="oReporters"></textarea><p class="hint">اسم في كل سطر. تظهر للمُبلّغ قائمةً يختار منها اسمه.</p></div>
+          <div class="fld"><label for="oZones">المناطق</label><textarea id="oZones"></textarea><p class="hint">منطقة في كل سطر.</p></div>
+          <div class="fld"><label for="oFloors">الأدوار</label><textarea id="oFloors"></textarea><p class="hint">دور في كل سطر.</p></div>
+        </div>
+        <div class="fld" style="max-width:420px"><label for="oMethods">طرق المعالجة المقترحة عند الإقفال</label><textarea id="oMethods" style="min-height:120px"></textarea></div>
+        <div class="savebar"><button class="btn primary" data-save="options">حفظ القوائم</button></div>
+      </div>
+
+      <div class="card" data-set="cats" hidden>
+        <p style="margin:0 0 14px;color:var(--muted);font-size:14px">لكل نوع: الاسم، الجهة المختصة التي يُحال إليها، والأوصاف المقترحة التي تظهر للمُبلّغ (وصف في كل سطر).</p>
+        <div id="catEd"></div>
+        <div class="savebar"><button class="btn" id="addCat">إضافة نوع</button><button class="btn primary" data-save="options">حفظ الأنواع</button></div>
+      </div>
+
+      <div class="card" data-set="ents" hidden>
+        <p style="margin:0 0 12px;color:var(--muted);font-size:14px">رقم واتساب يُستخدم عند الإحالة فتُفتح محادثة الجهة والرسالة جاهزة. الصيغة 05xxxxxxxx.</p>
+        <div class="ent hd"><span>اسم الجهة</span><span>رقم واتساب</span><span>الحالة</span></div>
         <div id="entList"></div>
-        <div style="margin-top:14px;display:flex;justify-content:flex-end"><button class="btn primary" id="saveEnt">حفظ الجهات</button></div>
+        <div class="savebar"><button class="btn" id="addEnt">إضافة جهة</button><button class="btn primary" id="saveEnt">حفظ الجهات</button></div>
+      </div>
+
+      <div class="card" data-set="notify" hidden>
+        <div id="mailState"></div>
+        <div class="cols3">
+          <div class="fld"><label for="mTo">البريد المستلم للإشعارات</label><input id="mTo" type="text" dir="ltr" placeholder="name@example.com"><p class="hint">يمكن إضافة أكثر من بريد بينها فاصلة.</p></div>
+          <div class="fld"><label for="mFrom">عنوان المرسل</label><input id="mFrom" type="text" dir="ltr" placeholder="alerts@yourdomain.com"><p class="hint">من نطاقك المفعّل في Cloudflare Email Service.</p></div>
+          <div class="fld" style="align-self:end"><button class="btn" id="testMail" style="width:100%"></button></div>
+        </div>
+        <h3 style="font-size:15px;margin:6px 0 4px">أنواع الإشعارات</h3>
+        <p style="margin:0 0 6px;color:var(--muted);font-size:13px">اترك خانة البريد فارغة ليُرسل إلى البريد الرئيسي، أو اكتب بريداً مختلفاً لهذا النوع.</p>
+        <div id="ntfList"></div>
+        <h3 style="font-size:15px;margin:20px 0 10px">مهلة المعالجة <small style="font-family:var(--font);font-weight:400;color:var(--muted)">بالساعات، يُحسب بعدها البلاغ متأخراً</small></h3>
+        <div class="cols3" id="slaEd"></div>
+        <div class="savebar"><button class="btn primary" id="saveNtf">حفظ الإشعارات والمهلة</button></div>
       </div>
     </section>
   </main>
@@ -246,209 +329,243 @@
 <script>
 (() => {
   const C = window.BN, $ = id => document.getElementById(id);
-  const S = { token: '', who: '', view: 'dash', range: '30', status: 'open', ents: [], items: [], maxId: 0, seen: 0, open: null };
-  const store = { get: k => { try { return localStorage.getItem(k) || ''; } catch { return ''; } },
-                  set: (k, v) => { try { v ? localStorage.setItem(k, v) : localStorage.removeItem(k); } catch {} } };
+  const S = { token: '', who: '', view: 'dash', range: '30', status: 'open', ents: [], opt: null, set: null, emailReady: false, maxId: 0, seen: 0, open: null, sla: { normal: 72, urgent: 24, critical: 6 } };
+  const store = { get: k => { try { return localStorage.getItem(k) || ''; } catch { return ''; } }, set: (k, v) => { try { v ? localStorage.setItem(k, v) : localStorage.removeItem(k); } catch {} } };
   const esc = v => String(v ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
-  const mosqueName = id => (C.MOSQUES.find(m => m.id === id) || {}).name || id || '';
-  const catOf = id => C.CATEGORIES.find(c => c.id === id) || { icon: 'help', label: id };
+  const DAY = 864e5, HOUR = 36e5;
+  const catOf = id => (S.opt && S.opt.categories.find(c => c.id === id)) || { icon: 'dot' };
   const entName = id => (S.ents.find(e => e.id === id) || {}).name || C.ENTITIES[id] || '—';
   const prioLabel = id => (C.PRIORITIES.find(p => p.id === id) || {}).label || 'عادي';
   const dtf = new Intl.DateTimeFormat('ar-SA-u-nu-latn-ca-gregory', { timeZone: 'Asia/Riyadh', day: 'numeric', month: 'short', hour: 'numeric', minute: '2-digit' });
   const fmtDate = t => t ? dtf.format(new Date(t)) : '';
-  const ago = t => { const m = Math.round((Date.now() - t) / 60000); if (m < 1) return 'الآن'; if (m < 60) return `منذ ${m} د`; const h = Math.round(m / 60); if (h < 24) return `منذ ${h} س`; return fmtDate(t); };
-  const dur = ms => { if (ms == null) return '–'; const m = Math.round(ms / 60000); if (m < 60) return m + ' د'; const h = Math.floor(m / 60); if (h < 48) return h + ' س' + (m % 60 ? ' ' + (m % 60) + ' د' : ''); return Math.round(h / 24) + ' يوم'; };
-  const toast = t => { const el = $('toast'); el.textContent = t; el.hidden = false; clearTimeout(toast.t); toast.t = setTimeout(() => el.hidden = true, 2600); };
-  const locText = r => [mosqueName(r.mosque), r.zone, r.floor, r.gate ? 'قرب باب ' + r.gate : ''].filter(Boolean).join('، ');
+  const xDate = t => t ? new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Riyadh', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', hour12: false }).format(new Date(t)).replace(',', '') : '';
+  const ago = t => { const m = Math.round((Date.now() - t) / 60000); if (m < 1) return 'الآن'; if (m < 60) return `منذ ${m} د`; const h = Math.round(m / 60); if (h < 24) return `منذ ${h} س`; return `منذ ${Math.floor(h / 24)} يوم`; };
+  const dur = ms => { if (ms == null) return '–'; const m = Math.round(ms / 60000); if (m < 60) return m + ' د'; const h = Math.floor(m / 60); if (h < 48) return h + ' س' + (m % 60 ? ' ' + m % 60 + ' د' : ''); return Math.round(h / 24) + ' يوم'; };
+  const lateMs = r => r.status === 'closed' ? 0 : Date.now() - r.created_at - (S.sla[r.priority] || S.sla.normal) * HOUR;
+  const lateTxt = ms => { const h = ms / HOUR; return h < 24 ? `متأخر ${Math.max(1, Math.round(h))} س` : `متأخر ${Math.round(h / 24)} يوم`; };
+  const toast = t => { const el = $('toast'); el.textContent = t; el.hidden = false; clearTimeout(toast.t); toast.t = setTimeout(() => el.hidden = true, 2800); };
+  const locText = r => [r.zone, r.floor, r.gate ? 'قرب باب ' + r.gate : ''].filter(Boolean).join('، ');
+  const evLabel = { created: 'استلام البلاغ', review: 'بدء المراجعة', refer: 'إحالة', close: 'إقفال', reopen: 'إعادة فتح', note: 'ملاحظة' };
+  const evColor = { created: 'var(--st-new)', review: 'var(--st-review)', refer: 'var(--st-referred)', close: 'var(--st-closed)', reopen: 'var(--p-urgent)', note: 'var(--muted)' };
 
   async function api(path, opt = {}) {
-    const r = await fetch(path, { ...opt, headers: { 'content-type': 'application/json', authorization: 'Bearer ' + S.token, ...(opt.headers || {}) } });
+    const r = await fetch(path, { ...opt, headers: { 'content-type': 'application/json', authorization: 'Bearer ' + S.token } });
     const d = await r.json().catch(() => ({}));
     if (r.status === 401) { logout(); throw new Error(d.error || 'سجّل الدخول من جديد'); }
     if (!r.ok) throw new Error(d.error || 'تعذّر تنفيذ الطلب');
     return d;
   }
 
-  // ================= الدخول =================
-  $('orgL').textContent = C.ORG; $('orgT').textContent = C.ORG;
-  $('logout').innerHTML = ic('out'); $('sIc').innerHTML = ic('search');
+  // ================= الدخول والتنقل =================
+  $('orgL').textContent = C.ORG;
+  $('logout').innerHTML = ic('out'); $('sIc').innerHTML = ic('search'); $('sIc2').innerHTML = ic('search');
+  $('expRep').innerHTML = ic('download') + 'تصدير Excel'; $('expLog').innerHTML = ic('download') + 'تصدير Excel';
+  $('testMail').innerHTML = ic('mail') + 'إرسال رسالة تجربة';
   $('who').value = store.get('bn_who');
   $('loginForm').addEventListener('submit', async e => {
     e.preventDefault(); $('lErr').textContent = '';
     try {
       const r = await fetch('/api/login', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ password: $('pw').value }) });
-      const d = await r.json();
-      if (!r.ok) throw new Error(d.error);
-      S.token = d.token; S.who = $('who').value.trim();
-      store.set('bn_tok', d.token); store.set('bn_who', S.who);
-      start();
+      const d = await r.json(); if (!r.ok) throw new Error(d.error);
+      S.token = d.token; S.who = $('who').value.trim(); store.set('bn_tok', d.token); store.set('bn_who', S.who); start();
     } catch (err) { $('lErr').textContent = err.message || 'تعذّر الدخول'; }
   });
   function logout() { store.set('bn_tok', ''); S.token = ''; $('app').hidden = true; $('login').hidden = false; document.body.classList.remove('app'); closeDrawer(); }
-  $('logout').addEventListener('click', logout);
+  $('logout').onclick = logout;
 
-  // ================= التنقل =================
-  document.querySelector('.tabs').addEventListener('click', e => { const b = e.target.closest('button'); if (b) go(b.dataset.view); });
+  const TABS = [['dash', 'المؤشرات', 'list'], ['new', 'الجديدة', 'alert'], ['reports', 'البلاغات', 'eye'], ['log', 'السجل', 'clock'], ['settings', 'الإعدادات', 'gear']];
+  $('tabs').innerHTML = TABS.map(([v, l, i]) => `<button role="tab" data-view="${v}">${ic(i)}${l}${v === 'new' ? ' <span class="cnt" id="newCnt" hidden></span>' : ''}</button>`).join('');
+  $('tabs').onclick = e => { const b = e.target.closest('button'); if (b) go(b.dataset.view); };
+  $('toLog').onclick = e => { e.preventDefault(); go('log'); };
   function go(v, status) {
     S.view = v;
-    document.querySelectorAll('.tabs button').forEach(b => b.setAttribute('aria-selected', b.dataset.view === v));
-    ['dash', 'reports', 'entities'].forEach(x => $('v-' + x).hidden = x !== v);
-    if (status) S.status = status;
-    if (v === 'dash') loadDash(); if (v === 'reports') loadList(); if (v === 'entities') renderEnts();
+    document.querySelectorAll('#tabs button').forEach(b => b.setAttribute('aria-selected', b.dataset.view === v));
+    TABS.forEach(([x]) => $('v-' + x).hidden = x !== v);
+    if (status !== undefined) S.status = status;
+    ({ dash: loadDash, new: loadNew, reports: loadList, log: loadLog, settings: renderSettings })[v]();
   }
 
   // ================= المؤشرات =================
-  $('range').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; S.range = b.dataset.v; $('range').querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', x === b)); loadDash(); });
-
+  $('range').onclick = e => { const b = e.target.closest('button'); if (!b) return; S.range = b.dataset.v; $('range').querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', x === b)); loadDash(); };
   function hbars(el, rows, opt = {}) {
-    if (!rows.length) { el.innerHTML = '<p class="empty">لا توجد بلاغات في هذه الفترة</p>'; return; }
+    if (!rows.length) { el.innerHTML = '<p class="empty">لا توجد بيانات في هذه الفترة</p>'; return; }
     const max = Math.max(...rows.map(r => r.c), 1);
     el.innerHTML = '<div class="hb">' + rows.map(r => {
       const done = opt.split ? (r.d || 0) : 0;
-      const segs = opt.split
-        ? `<div style="width:${done / max * 100}%;background:var(--gold-300)"></div><div style="width:${(r.c - done) / max * 100}%;background:var(--green-700)"></div>`
+      const segs = opt.split ? `<div style="width:${done / max * 100}%;background:var(--gold-300)"></div><div style="width:${(r.c - done) / max * 100}%;background:var(--green-700)"></div>`
         : `<div style="width:${r.c / max * 100}%;background:${opt.color || 'var(--green-700)'}"></div>`;
       return `<span class="lab" title="${esc(r.l)}">${esc(r.l)}</span><div class="tr">${segs}</div><span class="v num">${opt.split ? done + '/' + r.c : r.c}</span>`;
     }).join('') + '</div>';
   }
-
   function vbars(el, data, labels, opt = {}) {
     const W = 640, H = opt.h || 190, pb = 24, pt = 10, n = data.length, gap = opt.gap ?? 6;
     const max = Math.max(...data.map(d => d[0]), 1), bw = (W - gap * (n - 1)) / n;
     let svg = `<svg viewBox="0 0 ${W} ${H}" role="img">`;
     for (let i = 0; i < 4; i++) { const y = pt + (H - pb - pt) * i / 3; svg += `<line x1="0" x2="${W}" y1="${y}" y2="${y}" stroke="#E7ECEA"/>`; }
     data.forEach((d, i) => {
-      const x = W - (i + 1) * bw - i * gap; // من اليمين لليسار
-      const h = (H - pb - pt) * d[0] / max, h2 = (H - pb - pt) * (d[1] || 0) / max;
+      const x = W - (i + 1) * bw - i * gap, h = (H - pb - pt) * d[0] / max, h2 = (H - pb - pt) * (d[1] || 0) / max;
       svg += `<rect x="${x}" y="${H - pb - h}" width="${bw}" height="${h}" rx="3" fill="var(--green-700)"><title>${labels[i]}: ${d[0]}</title></rect>`;
       if (opt.two && h2) svg += `<rect x="${x + bw * .25}" y="${H - pb - h2}" width="${bw * .5}" height="${h2}" rx="2" fill="var(--gold-300)"/>`;
       if (!opt.every || (n - 1 - i) % opt.every === 0) svg += `<text x="${x + bw / 2}" y="${H - 7}" text-anchor="middle">${labels[i]}</text>`;
     });
     el.innerHTML = svg + '</svg>';
   }
-
   async function loadDash() {
     let d; try { d = await api('/api/dashboard?range=' + S.range); } catch (e) { return toast(e.message); }
+    S.sla = d.sla;
     const sc = Object.fromEntries(d.status.map(x => [x.status, x.c]));
     const total = d.status.reduce((a, x) => a + x.c, 0), closed = sc.closed || 0, rate = total ? Math.round(closed / total * 100) : 0;
+    const inSla = closed ? Math.round(d.within_sla / closed * 100) : 0;
+    $('dashSub').textContent = `${total} بلاغ في الفترة المحددة`;
     $('kpis').innerHTML = `
       <div class="kpi lead"><span>نسبة الإقفال</span><b class="num">${rate}%</b><div class="meter"><div style="width:${rate}%"></div></div>
-        <small>${closed} مغلق من ${total} بلاغ، متوسط الإقفال ${dur(d.avg_close_ms)}، وأول استجابة ${dur(d.avg_response_ms)}</small></div>
-      ${['new', 'review', 'referred', 'closed'].map(k => `<div class="kpi" data-go="${k}"><span><i style="background:var(--st-${k})"></i>${C.STATUS[k]}</span><b class="num">${sc[k] || 0}</b></div>`).join('')}`;
-    $('kpis').querySelectorAll('[data-go]').forEach(k => k.onclick = () => go('reports', k.dataset.go));
+        <small>${closed} مغلق من ${total}، و${inSla}% منها أُقفل ضمن المهلة</small></div>
+      <div class="kpi" data-go="new"><span><i style="background:var(--st-new)"></i>جديدة لم تُفتح</span><b class="num">${sc.new || 0}</b><small>تحتاج مراجعة</small></div>
+      <div class="kpi" data-go="open"><span><i style="background:var(--st-review)"></i>مفتوحة الآن</span><b class="num">${d.open_n}</b><small>${(sc.referred || 0)} منها محالة</small></div>
+      <div class="kpi ${d.overdue_n ? 'bad' : ''}" data-go="overdue"><span><i style="background:var(--p-critical)"></i>متأخرة</span><b class="num">${d.overdue_n}</b><small>تجاوزت مهلة المعالجة</small></div>
+      <div class="kpi"><span>${ic('clock')}متوسط المعالجة</span><b class="num" style="font-size:24px">${dur(d.avg_close_ms)}</b><small>من الرصد حتى الإقفال</small></div>
+      <div class="kpi"><span>${ic('chat')}أول استجابة</span><b class="num" style="font-size:24px">${dur(d.avg_response_ms)}</b><small>حتى الإحالة أو الإقفال</small></div>`;
+    $('kpis').querySelectorAll('[data-go]').forEach(k => k.onclick = () => k.dataset.go === 'new' ? go('new') : go('reports', k.dataset.go));
 
-    // اتجاه 14 يوماً
+    $('aging').innerHTML = ['أقل من يوم', '1 – 3 أيام', '3 – 7 أيام', 'أكثر من 7 أيام'].map((l, i) => `<div class="a${i}"><b class="num">${d.aging[i]}</b><span>${l}</span></div>`).join('');
+    $('slaTxt').textContent = `المهلة: حرج ${d.sla.critical} س، عاجل ${d.sla.urgent} س، عادي ${d.sla.normal} س`;
+    $('overdue').innerHTML = d.overdue.length ? `<table class="mini">${d.overdue.map(r => `<tr data-id="${r.id}"><td class="num" style="color:var(--green-800);font-weight:700">${esc(r.ref)}</td><td>${esc(r.category_label)}<br><small style="color:var(--muted)">${esc(r.zone)}</small></td><td><span class="pill p-${r.priority}">${prioLabel(r.priority)}</span></td><td class="late">${lateTxt(r.late_ms)}</td></tr>`).join('')}</table>
+      ${d.overdue_n > d.overdue.length ? `<p class="more"><a href="#" id="allOd" style="color:var(--green-800)">عرض كل المتأخرة (${d.overdue_n})</a></p>` : ''}` : '<p class="empty">لا توجد بلاغات متأخرة</p>';
+    $('overdue').querySelectorAll('tr').forEach(t => t.onclick = () => openReport(+t.dataset.id));
+    if ($('allOd')) $('allOd').onclick = e => { e.preventDefault(); go('reports', 'overdue'); };
+
     const days = [], lab = [];
-    for (let i = 13; i >= 0; i--) {
-      const t = new Date(Date.now() + 3 * 3600000 - i * 86400000).toISOString().slice(0, 10);
-      const row = d.trend.find(x => x.d === t) || { c: 0, x: 0 };
-      days.push([row.c, row.x]); lab.push(+t.slice(8, 10) + '/' + +t.slice(5, 7));
-    }
+    for (let i = 13; i >= 0; i--) { const t = new Date(Date.now() + 3 * HOUR - i * DAY).toISOString().slice(0, 10); const row = d.trend.find(x => x.d === t) || { c: 0, x: 0 }; days.push([row.c, row.x]); lab.push(+t.slice(8, 10) + '/' + +t.slice(5, 7)); }
     vbars($('trend'), days, lab, { two: true, every: 2 });
-
     const hrs = Array.from({ length: 24 }, (_, h) => [(d.hours.find(x => x.h === h) || { c: 0 }).c]);
     vbars($('hours'), hrs, hrs.map((_, h) => h), { gap: 3, every: 3, h: 170 });
-
     hbars($('byEntity'), d.entities.map(x => ({ l: entName(x.e), c: x.c, d: x.d })), { split: true });
     hbars($('byCat'), d.categories.map(x => ({ l: x.l || '—', c: x.c })));
-    hbars($('byZone'), d.zones.map(x => ({ l: x.l + ' (' + (x.m === 'nabawi' ? 'النبوي' : 'الحرام') + ')', c: x.c })), { color: 'var(--gold)' });
-
-    const op = Object.fromEntries(d.open_priority.map(x => [x.p, x.c]));
-    $('alerts').innerHTML = `
-      <div class="a"><span class="pill p-critical">حرجة مفتوحة</span><b class="num">${op.critical || 0}</b></div>
-      <div class="a"><span class="pill p-urgent">عاجلة مفتوحة</span><b class="num">${op.urgent || 0}</b></div>
-      <div class="a"><span>بلاغات جديدة لم تُراجع</span><b class="num">${sc.new || 0}</b></div>
-      <div class="a"><span>أقدم بلاغ مفتوح</span><b style="font-size:15px">${d.oldest_open ? ago(d.oldest_open) : '—'}</b></div>`;
+    hbars($('byZone'), d.zones.map(x => ({ l: x.l || '—', c: x.c })), { color: 'var(--gold)' });
+    hbars($('byMethod'), d.methods.map(x => ({ l: x.l, c: x.c })), { color: 'var(--st-closed)' });
+    $('recent').innerHTML = d.recent.length ? d.recent.map(e => `<li data-id="${e.id}"><span class="dotc" style="background:${evColor[e.action]}"></span><div><b>${evLabel[e.action] || e.action}</b> — ${esc(e.ref)} ${esc(e.category_label)}${e.note ? `<small>${esc(e.note)}</small>` : ''}<small>${ago(e.at)}، ${esc(e.actor || '')}</small></div></li>`).join('') : '<p class="empty">لا توجد حركات</p>';
+    $('recent').querySelectorAll('li').forEach(li => li.onclick = () => openReport(+li.dataset.id));
   }
 
-  // ================= البلاغات =================
-  $('fMosque').innerHTML += C.MOSQUES.map(m => `<option value="${m.id}">${m.name}</option>`).join('');
-  $('fPrio').innerHTML += C.PRIORITIES.map(p => `<option value="${p.id}">${p.label}</option>`).join('');
-  const fillEntSelect = () => { const v = $('fEntity').value; $('fEntity').innerHTML = '<option value="">كل الجهات</option>' + S.ents.map(e => `<option value="${e.id}">${esc(e.name)}</option>`).join(''); $('fEntity').value = v; };
-  ['fMosque', 'fEntity', 'fPrio', 'fRange'].forEach(id => $(id).addEventListener('change', loadList));
-  let qT; $('q').addEventListener('input', () => { clearTimeout(qT); qT = setTimeout(loadList, 300); });
-
-  function renderStTabs(counts) {
-    const tabs = [['open', 'المفتوحة'], ['new', C.STATUS.new], ['review', C.STATUS.review], ['referred', C.STATUS.referred], ['closed', C.STATUS.closed], ['', 'الكل']];
-    $('stTabs').innerHTML = tabs.map(([k, l]) => `<button data-v="${k}" aria-pressed="${S.status === k}">${l}${counts && counts[k] != null ? ` <b class="num">${counts[k]}</b>` : ''}</button>`).join('');
-  }
-  $('stTabs').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; S.status = b.dataset.v; loadList(); });
-
-  async function loadList(silent) {
-    const p = new URLSearchParams({ status: S.status, q: $('q').value.trim(), mosque: $('fMosque').value, entity_id: $('fEntity').value, priority: $('fPrio').value, range: $('fRange').value });
-    let d; try { d = await api('/api/reports?' + p); } catch (e) { if (!silent) toast(e.message); return; }
-    S.items = d.items;
-    // عدّاد الحالات من نفس الفلاتر (بدون فلتر الحالة)
-    const all = await api('/api/reports?' + new URLSearchParams({ ...Object.fromEntries(p), status: '' })).catch(() => ({ items: [] }));
-    const counts = { '': all.items.length, open: 0, new: 0, review: 0, referred: 0, closed: 0 };
-    all.items.forEach(r => { counts[r.status]++; if (r.status !== 'closed') counts.open++; });
-    renderStTabs(counts);
-    if (!d.items.length) { $('list').innerHTML = `<p class="empty">${S.status === 'open' ? 'لا توجد بلاغات مفتوحة، كل البلاغات معالجة' : 'لا توجد بلاغات تطابق البحث'}</p>`; return; }
-    $('list').innerHTML = `<div class="row head"><span style="text-align:end">الرقم</span><span>النوع</span><span>المكان</span><span>الأولوية</span><span>الحالة</span><span>الوقت</span></div>` +
-      d.items.map(r => `<div class="row ${r.id > S.seen && S.seen ? 'fresh' : ''}" data-id="${r.id}" tabindex="0">
+  // ================= القوائم =================
+  function rowsHtml(items) {
+    return `<div class="row hd"><span style="text-align:end">الرقم</span><span>النوع</span><span>المكان</span><span>المُبلّغ</span><span>الأولوية</span><span>الحالة</span><span>العمر</span></div>` +
+      items.map(r => { const late = lateMs(r);
+        return `<div class="row ${S.seen && r.id > S.seen ? 'fresh' : ''}" data-id="${r.id}" tabindex="0">
         <span class="ref num">${esc(r.ref)}</span>
-        <span class="cat">${ic(catOf(r.category).icon)}<span>${esc(r.category_label)}</span></span>
+        <span class="cat">${ic(catOf(r.category).icon || 'dot')}<span>${esc(r.category_label)}</span></span>
         <span class="loc">${r.has_photo ? `<span class="pic" title="مرفق صورة">${ic('camera')}</span> ` : ''}${esc(locText(r))}</span>
+        <span class="who">${esc(r.reporter_name || '—')}</span>
         <span class="pr"><span class="pill p-${r.priority}">${prioLabel(r.priority)}</span></span>
         <span class="st"><span class="pill s-${r.status}">${C.STATUS[r.status]}</span></span>
-        <span class="tm">${ago(r.created_at)}</span></div>`).join('') +
-      (d.items.length >= 500 ? '<p class="more">تُعرض أحدث 500 نتيجة، استخدم الفلاتر لتضييق البحث</p>' : '');
+        <span class="age ${late > 0 ? 'late' : ''}">${r.status === 'closed' ? 'عولج خلال ' + dur(r.closed_at - r.created_at) : late > 0 ? lateTxt(late) : ago(r.created_at)}</span></div>`; }).join('');
   }
-  $('list').addEventListener('click', e => { const r = e.target.closest('.row[data-id]'); if (r) openReport(+r.dataset.id); });
-  $('list').addEventListener('keydown', e => { if (e.key === 'Enter') { const r = e.target.closest('.row[data-id]'); if (r) openReport(+r.dataset.id); } });
+  const bindRows = el => { el.onclick = e => { const r = e.target.closest('.row[data-id]'); if (r) openReport(+r.dataset.id); }; el.onkeydown = e => { if (e.key === 'Enter') { const r = e.target.closest('.row[data-id]'); if (r) openReport(+r.dataset.id); } }; };
+  bindRows($('list')); bindRows($('newList'));
+
+  async function loadNew() {
+    let d; try { d = await api('/api/reports?status=new&order=asc'); } catch (e) { return toast(e.message); }
+    S.sla = d.sla;
+    $('newList').innerHTML = d.items.length ? rowsHtml(d.items) : '<p class="empty">لا توجد بلاغات جديدة، كل الوارد تمت مراجعته</p>';
+  }
+
+  function fillFilters() {
+    const keep = id => $(id).value;
+    const z = keep('fZone'), c = keep('fCat'), en = keep('fEntity'), p = keep('fPrio');
+    $('fZone').innerHTML = '<option value="">كل المناطق</option>' + S.opt.zones.map(x => `<option>${esc(x)}</option>`).join('');
+    $('fCat').innerHTML = '<option value="">كل الأنواع</option>' + S.opt.categories.map(x => `<option value="${esc(x.id)}">${esc(x.label)}</option>`).join('');
+    $('fEntity').innerHTML = '<option value="">كل الجهات</option>' + S.ents.map(e => `<option value="${esc(e.id)}">${esc(e.name)}</option>`).join('');
+    $('fPrio').innerHTML = '<option value="">كل الأولويات</option>' + C.PRIORITIES.map(x => `<option value="${x.id}">${x.label}</option>`).join('');
+    $('fZone').value = z; $('fCat').value = c; $('fEntity').value = en; $('fPrio').value = p;
+  }
+  ['fZone', 'fCat', 'fEntity', 'fPrio', 'fRange'].forEach(id => $(id).addEventListener('change', () => loadList()));
+  let qT; $('q').addEventListener('input', () => { clearTimeout(qT); qT = setTimeout(loadList, 300); });
+  $('stTabs').onclick = e => { const b = e.target.closest('button'); if (!b) return; S.status = b.dataset.v; loadList(); };
+  const listParams = (status = S.status) => new URLSearchParams({ status, q: $('q').value.trim(), zone: $('fZone').value, category: $('fCat').value, entity_id: $('fEntity').value, priority: $('fPrio').value, range: $('fRange').value });
+
+  async function loadList(silent) {
+    let d, all;
+    try { [d, all] = await Promise.all([api('/api/reports?' + listParams()), api('/api/reports?' + listParams(''))]); } catch (e) { if (!silent) toast(e.message); return; }
+    S.sla = d.sla;
+    const counts = { '': all.items.length, open: 0, overdue: 0, new: 0, review: 0, referred: 0, closed: 0 };
+    all.items.forEach(r => { counts[r.status]++; if (r.status !== 'closed') { counts.open++; if (lateMs(r) > 0) counts.overdue++; } });
+    const tabs = [['open', 'المفتوحة'], ['overdue', 'المتأخرة'], ['new', C.STATUS.new], ['review', C.STATUS.review], ['referred', C.STATUS.referred], ['closed', C.STATUS.closed], ['', 'الكل']];
+    $('stTabs').innerHTML = tabs.map(([k, l]) => `<button data-v="${k}" class="${k === 'overdue' ? 'od' : ''}" aria-pressed="${S.status === k}">${l} <b class="num">${counts[k]}</b></button>`).join('');
+    $('list').innerHTML = d.items.length ? rowsHtml(d.items) + (d.items.length >= 500 ? '<p class="more">تُعرض أحدث 500 نتيجة، والتصدير يشمل الكل</p>' : '') : '<p class="empty">لا توجد بلاغات تطابق البحث</p>';
+  }
+
+  // ================= تصدير Excel =================
+  let xlsxP;
+  const loadXlsx = () => xlsxP || (xlsxP = new Promise((res, rej) => { const s = document.createElement('script'); s.src = 'https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js'; s.onload = () => res(window.XLSX); s.onerror = () => { xlsxP = null; rej(new Error('تعذّر تحميل أداة Excel')); }; document.head.appendChild(s); }));
+  function saveXlsx(X, rows, sheet, file, widths) {
+    const ws = X.utils.json_to_sheet(rows); ws['!cols'] = widths.map(w => ({ wch: w }));
+    if (rows.length) ws['!autofilter'] = { ref: ws['!ref'] };
+    const wb = X.utils.book_new(); wb.Workbook = { Views: [{ RTL: true }] };
+    X.utils.book_append_sheet(wb, ws, sheet); X.writeFile(wb, file);
+  }
+  const stamp = () => new Date(Date.now() + 3 * HOUR).toISOString().slice(0, 10);
+  $('expRep').onclick = async () => {
+    const b = $('expRep'); b.disabled = true;
+    try {
+      const [X, d] = await Promise.all([loadXlsx(), api('/api/reports?' + listParams() + '&full=1&order=asc')]);
+      const rows = d.items.map(r => { const late = lateMs(r);
+        return { 'رقم البلاغ': r.ref, 'تاريخ الرصد': xDate(r.created_at), 'المنطقة': r.zone, 'الدور': r.floor || '', 'أقرب باب': r.gate || '', 'وصف المكان': r.spot || '',
+          'نوع الملاحظة': r.category_label, 'الجهة': entName(r.entity_id), 'الأولوية': prioLabel(r.priority), 'الحالة': C.STATUS[r.status], 'التفاصيل': r.details || '',
+          'المُبلّغ': r.reporter_name || '', 'تاريخ الإحالة': xDate(r.referred_at), 'تاريخ الإقفال': xDate(r.closed_at),
+          'مدة المعالجة (ساعة)': r.closed_at ? +((r.closed_at - r.created_at) / HOUR).toFixed(1) : '', 'طريقة المعالجة': r.closure_method || '', 'ملاحظة الإقفال': r.closure_note || '',
+          'أيام التأخير': late > 0 ? +(late / DAY).toFixed(1) : '', 'صورة': r.has_photo ? 'نعم' : 'لا', 'الإحداثيات': r.lat != null ? `${r.lat}, ${r.lng}` : '' }; });
+      saveXlsx(X, rows, 'البلاغات', `بلاغات-المسجد-الحرام-${stamp()}.xlsx`, [11, 17, 22, 12, 10, 22, 16, 20, 9, 12, 40, 16, 17, 17, 12, 24, 30, 11, 7, 22]);
+      toast(`صُدّر ${rows.length} بلاغ`);
+    } catch (e) { toast(e.message); } finally { b.disabled = false; }
+  };
+
+  // ================= السجل =================
+  $('lAct').innerHTML += Object.entries(evLabel).map(([k, l]) => `<option value="${k}">${l}</option>`).join('');
+  ['lAct', 'lRange'].forEach(id => $(id).addEventListener('change', () => loadLog()));
+  let lqT; $('lq').addEventListener('input', () => { clearTimeout(lqT); lqT = setTimeout(loadLog, 300); });
+  const logParams = () => new URLSearchParams({ action: $('lAct').value, range: $('lRange').value, q: $('lq').value.trim() });
+  async function loadLog() {
+    let d; try { d = await api('/api/log?' + logParams()); } catch (e) { return toast(e.message); }
+    $('logBody').innerHTML = d.items.length ? d.items.map(e => `<tr class="cl" data-id="${e.id}"><td style="white-space:nowrap">${fmtDate(e.at)}</td><td class="num" style="white-space:nowrap"><b style="color:var(--green-800)">${esc(e.ref)}</b><br><small style="color:var(--muted)">${esc(e.category_label)}</small></td>
+      <td><span class="act-b" style="color:${evColor[e.action]}">${evLabel[e.action] || e.action}</span></td><td>${esc(e.note || '—')}</td><td>${esc(e.actor || '')}</td></tr>`).join('') : '<tr><td colspan="5" class="empty">لا توجد حركات في هذه الفترة</td></tr>';
+    $('logBody').querySelectorAll('tr[data-id]').forEach(t => t.onclick = () => openReport(+t.dataset.id));
+  }
+  $('expLog').onclick = async () => {
+    try {
+      const [X, d] = await Promise.all([loadXlsx(), api('/api/log?' + logParams() + '&full=1')]);
+      saveXlsx(X, d.items.map(e => ({ 'الوقت': xDate(e.at), 'رقم البلاغ': e.ref, 'نوع الملاحظة': e.category_label, 'المنطقة': e.zone, 'الإجراء': evLabel[e.action] || e.action, 'التفاصيل': e.note || '', 'بواسطة': e.actor || '', 'حالة البلاغ الآن': C.STATUS[e.status] })),
+        'السجل', `سجل-البلاغات-${stamp()}.xlsx`, [17, 11, 16, 22, 12, 40, 16, 14]);
+      toast(`صُدّرت ${d.items.length} حركة`);
+    } catch (e) { toast(e.message); }
+  };
 
   // ================= تفاصيل البلاغ =================
   const waNumber = p => { let d = String(p || '').replace(/\D/g, ''); if (d.startsWith('00')) d = d.slice(2); if (d.startsWith('05')) d = '966' + d.slice(1); else if (d.length === 9 && d.startsWith('5')) d = '966' + d; return d; };
   function waText(r, entId, photoLink) {
     const map = r.lat != null ? `https://maps.google.com/?q=${r.lat},${r.lng}` : '';
-    return [
-      'السلام عليكم ورحمة الله وبركاته',
-      `الإخوة في ${entName(entId)} المحترمين،`,
-      'نأمل التكرم بمعالجة البلاغ الميداني التالي:',
-      '',
-      `رقم البلاغ: ${r.ref}`,
-      `نوع الملاحظة: ${r.category_label}`,
-      `الأولوية: ${prioLabel(r.priority)}`,
-      `الموقع: ${locText(r)}`,
-      r.spot ? `وصف المكان: ${r.spot}` : '',
-      r.details ? `التفاصيل: ${r.details.replace(/\n+/g, '، ')}` : '',
-      map ? `الموقع على الخريطة: ${map}` : '',
-      photoLink ? `صورة البلاغ: ${photoLink}` : '',
-      `وقت الرصد: ${fmtDate(r.created_at)}`,
-      '',
-      'نأمل إكمال الطلب المرسل وإفادتنا بما تم، شاكرين تعاونكم.',
-      C.OPS
-    ].filter((l, i, a) => l !== '' || (a[i - 1] !== '' && i > 0)).join('\n');
+    return ['السلام عليكم ورحمة الله وبركاته', `الإخوة في ${entName(entId)} المحترمين،`, 'نأمل التكرم بمعالجة البلاغ الميداني التالي في المسجد الحرام:', '',
+      `رقم البلاغ: ${r.ref}`, `نوع الملاحظة: ${r.category_label}`, `الأولوية: ${prioLabel(r.priority)}`, `الموقع: ${locText(r)}`,
+      r.spot ? `وصف المكان: ${r.spot}` : null, r.details ? `التفاصيل: ${r.details.replace(/\n+/g, '، ')}` : null,
+      map ? `الموقع على الخريطة: ${map}` : null, photoLink ? `صورة البلاغ: ${photoLink}` : null, `وقت الرصد: ${fmtDate(r.created_at)}`, '',
+      'نأمل إكمال الطلب المرسل وإفادتنا بما تم، شاكرين تعاونكم.', C.OPS].filter(l => l !== null).join('\n');
   }
-  const evLabel = { created: 'استلام البلاغ', review: 'بدء المراجعة', refer: 'إحالة', close: 'إقفال', reopen: 'إعادة فتح', note: 'ملاحظة' };
-
   async function openReport(id) {
     let d; try { d = await api('/api/reports/' + id); } catch (e) { return toast(e.message); }
-    S.open = d; const r = d.report;
-    const c = catOf(r.category);
+    S.open = d; S.sla = d.sla; const r = d.report; const late = lateMs(r);
+    history.replaceState(null, '', '#r' + id);
     $('drawerHost').innerHTML = `
       <div class="scrim" id="scrim"></div>
       <aside class="drawer" role="dialog" aria-modal="true" aria-labelledby="dTitle">
-        <div class="d-head">
-          <div><h2 id="dTitle">${esc(r.category_label)}</h2>
-            <div class="meta"><span class="pill s-${r.status}">${C.STATUS[r.status]}</span><span class="pill p-${r.priority}">${prioLabel(r.priority)}</span><span class="pill" style="background:var(--marble);color:var(--muted)">${esc(r.ref)}</span></div></div>
-          <button class="close" id="dClose" aria-label="إغلاق">${ic('x')}</button>
-        </div>
+        <div class="d-head"><div><h2 id="dTitle">${esc(r.category_label)}</h2>
+          <div class="meta"><span class="pill s-${r.status}" id="dSt">${C.STATUS[r.status]}</span><span class="pill p-${r.priority}">${prioLabel(r.priority)}</span><span class="pill" style="background:var(--marble);color:var(--muted)">${esc(r.ref)}</span>${late > 0 ? `<span class="pill" style="background:#FDF3F2;color:var(--p-critical)">${lateTxt(late)}</span>` : ''}</div></div>
+          <button class="close" id="dClose" aria-label="إغلاق">${ic('x')}</button></div>
         <div class="d-body">
+          ${r.status === 'closed' ? `<div class="blk done"><h4>طريقة المعالجة</h4><div style="font-weight:700;font-size:15.5px">${esc(r.closure_method || 'غير محددة')}</div>${r.closure_note ? `<div style="margin-top:4px">${esc(r.closure_note)}</div>` : ''}<div style="font-size:13px;color:var(--muted);margin-top:6px">أُقفل ${fmtDate(r.closed_at)}، بعد ${dur(r.closed_at - r.created_at)} من الرصد</div></div>` : ''}
           ${d.photo ? `<div class="d-photo" id="dPhoto"><img src="${d.photo}" alt="صورة البلاغ"></div>` : ''}
-          <div class="blk"><h4>الموقع</h4>
-            <div class="loc-line">${esc(locText(r))}</div>
-            ${r.spot ? `<div>${esc(r.spot)}</div>` : ''}
-            ${r.lat != null ? `<a class="maplink" target="_blank" rel="noopener" href="https://maps.google.com/?q=${r.lat},${r.lng}">${ic('map')}فتح الموقع على الخريطة${r.acc ? ` <small style="color:var(--muted);font-weight:400">(دقة ${Math.round(r.acc)} م)</small>` : ''}</a>` : '<div style="color:var(--muted);font-size:13px;margin-top:6px">لم يُرفق موقع جغرافي</div>'}
-          </div>
+          <div class="blk"><h4>الموقع</h4><div class="loc-line">${esc(locText(r))}</div>${r.spot ? `<div>${esc(r.spot)}</div>` : ''}
+            ${r.lat != null ? `<a class="maplink" target="_blank" rel="noopener" href="https://maps.google.com/?q=${r.lat},${r.lng}">${ic('map')}فتح الموقع على الخريطة${r.acc ? ` <small style="color:var(--muted);font-weight:400">(دقة ${Math.round(r.acc)} م)</small>` : ''}</a>` : '<div style="color:var(--muted);font-size:13px;margin-top:6px">لم يُرفق موقع جغرافي</div>'}</div>
           <div class="blk"><h4>التفاصيل</h4><div class="details">${r.details ? esc(r.details) : '<span style="color:var(--muted)">لم تُكتب تفاصيل</span>'}</div></div>
-          <div class="blk"><dl class="kv">
-            <dt>الجهة</dt><dd>${esc(entName(r.entity_id))}</dd>
-            <dt>وقت الرصد</dt><dd>${fmtDate(r.created_at)}</dd>
-            <dt>المُبلّغ</dt><dd>${esc(r.reporter_name || 'غير مذكور')}${r.reporter_phone ? ` — <a href="tel:${esc(r.reporter_phone)}" dir="ltr">${esc(r.reporter_phone)}</a>` : ''}</dd>
-            ${r.closed_at ? `<dt>مدة المعالجة</dt><dd>${dur(r.closed_at - r.created_at)}</dd>` : ''}
-            ${r.closure_note ? `<dt>ملاحظة الإقفال</dt><dd>${esc(r.closure_note)}</dd>` : ''}
-          </dl></div>
+          <div class="blk"><dl class="kv"><dt>الجهة</dt><dd>${esc(entName(r.entity_id))}</dd><dt>وقت الرصد</dt><dd>${fmtDate(r.created_at)}</dd><dt>المُبلّغ</dt><dd>${esc(r.reporter_name || 'غير مذكور')}</dd></dl></div>
           <div class="blk"><h4>سجل البلاغ</h4><ul class="tl">${d.events.map(e => `<li><b>${evLabel[e.action] || e.action}</b>${e.note ? ' — ' + esc(e.note) : ''}<small>${fmtDate(e.at)}${e.actor ? '، ' + esc(e.actor) : ''}</small></li>`).join('')}</ul></div>
         </div>
         <div class="acts" id="acts"></div>
@@ -456,78 +573,110 @@
     $('scrim').onclick = closeDrawer; $('dClose').onclick = closeDrawer;
     if ($('dPhoto')) $('dPhoto').onclick = () => { const lb = document.createElement('div'); lb.className = 'lightbox'; lb.innerHTML = `<img src="${d.photo}" alt="">`; lb.onclick = () => lb.remove(); document.body.appendChild(lb); };
     renderActs(r.status === 'closed' ? 'reopen' : 'refer');
-    if (r.status === 'new') act('review', {}, true); // فتح البلاغ = بدء المراجعة
+    if (r.status === 'new') act('review', {}, true);
   }
-
   function renderActs(mode) {
     const r = S.open.report;
-    if (r.status === 'closed') {
-      $('acts').innerHTML = `<div class="act-panel"><div class="btns"><button class="btn" id="aReopen">إعادة فتح البلاغ</button></div></div>`;
-      $('aReopen').onclick = () => act('reopen');
-      return;
-    }
-    const tabs = `<div class="act-tabs"><button data-m="refer" aria-pressed="${mode === 'refer'}">إحالة عبر واتساب</button><button data-m="close" aria-pressed="${mode === 'close'}">إقفال</button><button data-m="note" aria-pressed="${mode === 'note'}">ملاحظة</button></div>`;
-    let panel = '';
+    if (r.status === 'closed') { $('acts').innerHTML = `<div class="act-panel"><div class="btns"><button class="btn" id="aReopen">إعادة فتح البلاغ</button></div></div>`; $('aReopen').onclick = () => act('reopen'); return; }
+    let panel;
     if (mode === 'refer') {
-      const active = S.ents.filter(e => e.active);
-      panel = `<select id="aEnt">${active.map(e => `<option value="${e.id}" ${e.id === r.entity_id ? 'selected' : ''}>${esc(e.name)}${e.phone ? '' : ' (بدون رقم)'}</option>`).join('')}</select>
-        <textarea id="aMsg" aria-label="نص الرسالة"></textarea><p class="warn" id="aWarn" hidden>لا يوجد رقم واتساب لهذه الجهة؛ ستختار المحادثة يدوياً. أضف الرقم من تبويب الجهات.</p>
+      panel = `<select id="aEnt">${S.ents.filter(e => e.active).map(e => `<option value="${esc(e.id)}" ${e.id === r.entity_id ? 'selected' : ''}>${esc(e.name)}${e.phone ? '' : ' (بدون رقم)'}</option>`).join('')}</select>
+        <textarea id="aMsg" aria-label="نص الرسالة"></textarea><p class="warn" id="aWarn" hidden>لا يوجد رقم واتساب لهذه الجهة؛ ستختار المحادثة يدوياً. أضف الرقم من الإعدادات ← الجهات.</p>
         <div class="btns"><button class="btn wa" id="aSend">${ic('chat')}إرسال عبر واتساب</button></div>`;
     } else if (mode === 'close') {
-      panel = `<textarea id="aNote" placeholder="ما الذي تم؟ مثال: تمت المعالجة من فريق الصيانة"></textarea>
+      panel = `<select id="aMethod"><option value="" disabled selected>اختر طريقة المعالجة</option>${S.opt.methods.map(m => `<option>${esc(m)}</option>`).join('')}</select>
+        <textarea id="aNote" placeholder="تفاصيل ما تم (اختياري)"></textarea>
         <div class="btns"><button class="btn primary" id="aClose">${ic('check')}إقفال البلاغ</button></div>`;
     } else {
-      panel = `<textarea id="aNote" placeholder="ملاحظة داخلية تظهر في سجل البلاغ"></textarea>
-        <div class="btns"><button class="btn" id="aNoteBtn">إضافة الملاحظة</button></div>`;
+      panel = `<textarea id="aNote" placeholder="ملاحظة داخلية تظهر في سجل البلاغ"></textarea><div class="btns"><button class="btn" id="aNoteBtn">إضافة الملاحظة</button></div>`;
     }
-    $('acts').innerHTML = tabs + `<div class="act-panel">${panel}</div>`;
+    $('acts').innerHTML = `<div class="act-tabs"><button data-m="refer" aria-pressed="${mode === 'refer'}">إحالة عبر واتساب</button><button data-m="close" aria-pressed="${mode === 'close'}">إقفال</button><button data-m="note" aria-pressed="${mode === 'note'}">ملاحظة</button></div><div class="act-panel">${panel}</div>`;
     $('acts').querySelector('.act-tabs').onclick = e => { const b = e.target.closest('button'); if (b) renderActs(b.dataset.m); };
     if (mode === 'refer') {
       const sync = () => { const ent = S.ents.find(e => e.id === $('aEnt').value) || {}; $('aMsg').value = waText(r, $('aEnt').value, S.open.photo_link); $('aWarn').hidden = !!ent.phone; };
       $('aEnt').onchange = sync; sync();
-      $('aSend').onclick = () => {
-        const ent = S.ents.find(e => e.id === $('aEnt').value) || {};
-        const n = waNumber(ent.phone);
-        window.open(`https://wa.me/${n}?text=${encodeURIComponent($('aMsg').value)}`, '_blank', 'noopener');
-        act('refer', { entity_id: $('aEnt').value, note: 'إلى: ' + entName($('aEnt').value) });
-      };
+      $('aSend').onclick = () => { const ent = S.ents.find(e => e.id === $('aEnt').value) || {};
+        window.open(`https://wa.me/${waNumber(ent.phone)}?text=${encodeURIComponent($('aMsg').value)}`, '_blank', 'noopener');
+        act('refer', { entity_id: $('aEnt').value, note: 'إلى: ' + entName($('aEnt').value) }); };
     }
-    if (mode === 'close') $('aClose').onclick = () => act('close', { note: $('aNote').value.trim() });
+    if (mode === 'close') $('aClose').onclick = () => { if (!$('aMethod').value) return toast('اختر طريقة المعالجة'); act('close', { method: $('aMethod').value, note: $('aNote').value.trim() }); };
     if (mode === 'note') $('aNoteBtn').onclick = () => { const v = $('aNote').value.trim(); if (!v) return toast('اكتب الملاحظة أولاً'); act('note', { note: v }); };
   }
-
   async function act(action, extra = {}, quiet) {
     const id = S.open.report.id;
     try {
       await api(`/api/reports/${id}/action`, { method: 'POST', body: JSON.stringify({ action, actor: S.who, ...extra }) });
-      if (!quiet) toast({ refer: 'أُحيل البلاغ', close: 'أُقفل البلاغ', reopen: 'أُعيد فتح البلاغ', note: 'أُضيفت الملاحظة' }[action] || 'تم');
-      if (action === 'close') closeDrawer(); else if (!quiet) openReport(id);
-      else { S.open.report.status = 'review'; const pl = document.querySelector('.d-head .meta .pill'); if (pl) { pl.className = 'pill s-review'; pl.textContent = C.STATUS.review; } }
+      if (quiet) { S.open.report.status = 'review'; const p = $('dSt'); if (p) { p.className = 'pill s-review'; p.textContent = C.STATUS.review; } }
+      else { toast({ refer: 'أُحيل البلاغ', close: 'أُقفل البلاغ', reopen: 'أُعيد فتح البلاغ', note: 'أُضيفت الملاحظة' }[action] || 'تم'); openReport(id); }
       refresh(true);
     } catch (e) { toast(e.message); }
   }
-  function closeDrawer() { $('drawerHost').innerHTML = ''; S.open = null; }
+  function closeDrawer() { $('drawerHost').innerHTML = ''; S.open = null; if (location.hash) history.replaceState(null, '', location.pathname); }
   document.addEventListener('keydown', e => { if (e.key === 'Escape') { const lb = document.querySelector('.lightbox'); lb ? lb.remove() : closeDrawer(); } });
 
-  // ================= الجهات =================
-  async function loadEnts() { try { S.ents = (await api('/api/entities')).items; fillEntSelect(); } catch {} }
+  // ================= الإعدادات =================
+  const SETS = [['lists', 'القوائم والأسماء'], ['cats', 'أنواع الملاحظات'], ['ents', 'الجهات'], ['notify', 'الإشعارات والمهلة']];
+  let setTab = 'lists';
+  $('setNav').innerHTML = SETS.map(([k, l]) => `<button data-v="${k}">${l}</button>`).join('');
+  $('setNav').onclick = e => { const b = e.target.closest('button'); if (b) { setTab = b.dataset.v; renderSettings(); } };
+  const lines = id => $(id).value.split('\n').map(x => x.trim()).filter(Boolean);
+  const NTF = [['new', 'بلاغ جديد', 'فور وصول أي بلاغ من الميدان'], ['refer', 'إحالة بلاغ', 'عند إحالة بلاغ إلى جهة'], ['close', 'إقفال بلاغ', 'عند إقفال بلاغ مع طريقة المعالجة'], ['other', 'تحديثات أخرى', 'إعادة فتح البلاغ أو إضافة ملاحظة'], ['digest', 'ملخص يومي بالمتأخرة', 'كل يوم 7 صباحاً إن وُجدت بلاغات متأخرة']];
+
+  async function loadSettings() { const d = await api('/api/settings'); S.opt = d.options; S.set = d.settings; S.emailReady = d.email_ready; S.sla = d.settings.sla; }
+  async function renderSettings() {
+    try { await loadSettings(); } catch (e) { return toast(e.message); }
+    $('setNav').querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', b.dataset.v === setTab));
+    document.querySelectorAll('[data-set]').forEach(c => c.hidden = c.dataset.set !== setTab);
+    const o = S.opt, st = S.set;
+    $('oReporters').value = o.reporters.join('\n'); $('oZones').value = o.zones.join('\n'); $('oFloors').value = o.floors.join('\n'); $('oMethods').value = o.methods.join('\n');
+    renderCats(); renderEnts();
+    $('mailState').innerHTML = S.emailReady ? `<div class="banner ok">${ic('check')}<span>خدمة البريد مفعّلة. أرسل رسالة تجربة للتأكد.</span></div>`
+      : `<div class="banner warn">${ic('alert')}<span>خدمة البريد لم تُفعّل بعد في Cloudflare. احفظ الإعدادات الآن، وستبدأ الإشعارات تلقائياً بعد تفعيل Email Service وربطه بالمشروع.</span></div>`;
+    $('mTo').value = st.mail_to; $('mFrom').value = st.mail_from;
+    $('ntfList').innerHTML = NTF.map(([k, l, h]) => `<div class="ntf"><div><b>${l}</b><small>${h}</small></div><label class="switch"><input type="checkbox" data-n="${k}" ${st.notify[k].on ? 'checked' : ''}>تشغيل</label><input type="text" dir="ltr" data-nt="${k}" value="${esc(st.notify[k].to)}" placeholder="البريد الرئيسي"></div>`).join('');
+    $('slaEd').innerHTML = C.PRIORITIES.slice().reverse().map(p => `<div class="fld"><label>${p.label}</label><input type="text" inputmode="numeric" dir="ltr" data-sla="${p.id}" value="${st.sla[p.id]}"></div>`).join('');
+  }
+  function renderCats() {
+    $('catEd').innerHTML = S.opt.categories.map((c, i) => `<div class="cat-ed" data-i="${i}">
+      <input value="${esc(c.label)}" data-f="label" aria-label="اسم النوع" placeholder="اسم النوع">
+      <select data-f="entity" aria-label="الجهة">${S.ents.map(e => `<option value="${esc(e.id)}" ${e.id === c.entity ? 'selected' : ''}>${esc(e.name)}</option>`).join('')}</select>
+      <button class="del" data-del="${i}" title="حذف النوع" aria-label="حذف النوع">${ic('x')}</button>
+      <textarea data-f="quick" aria-label="الأوصاف المقترحة" placeholder="الأوصاف المقترحة، وصف في كل سطر">${esc(c.quick.join('\n'))}</textarea></div>`).join('');
+  }
+  $('catEd').addEventListener('input', e => { const box = e.target.closest('.cat-ed'); if (!box) return; const c = S.opt.categories[+box.dataset.i], f = e.target.dataset.f; c[f] = f === 'quick' ? e.target.value.split('\n').map(x => x.trim()).filter(Boolean) : e.target.value; });
+  $('catEd').addEventListener('change', e => { const box = e.target.closest('.cat-ed'); if (box && e.target.dataset.f === 'entity') S.opt.categories[+box.dataset.i].entity = e.target.value; });
+  $('catEd').addEventListener('click', e => { const b = e.target.closest('[data-del]'); if (!b) return; if (!confirm('حذف هذا النوع من القائمة؟ البلاغات السابقة تبقى كما هي.')) return; S.opt.categories.splice(+b.dataset.del, 1); renderCats(); });
+  $('addCat').onclick = () => { S.opt.categories.push({ id: 'c' + Date.now(), label: '', entity: (S.ents[0] || {}).id || '', icon: 'dot', quick: [] }); renderCats(); $('catEd').lastElementChild.querySelector('input').focus(); };
+  document.querySelectorAll('[data-save="options"]').forEach(b => b.onclick = async () => {
+    const o = { ...S.opt, reporters: lines('oReporters'), zones: lines('oZones'), floors: lines('oFloors'), methods: lines('oMethods') };
+    try { const d = await api('/api/settings', { method: 'PUT', body: JSON.stringify({ options: o }) }); S.opt = d.options; fillFilters(); toast('حُفظت التعديلات، وظهرت في صفحة البلاغ'); renderSettings(); } catch (e) { toast(e.message); }
+  });
+
   function renderEnts() {
     $('entList').innerHTML = S.ents.map((e, i) => `<div class="ent" data-i="${i}">
-      <input value="${esc(e.name)}" data-f="name" aria-label="اسم الجهة">
-      <input value="${esc(e.phone || '')}" data-f="phone" dir="ltr" placeholder="05xxxxxxxx" aria-label="رقم واتساب">
-      <label class="switch"><input type="checkbox" data-f="active" ${e.active ? 'checked' : ''}>مفعّلة</label>
-      <span></span></div>`).join('');
+      <input value="${esc(e.name)}" data-f="name" aria-label="اسم الجهة"><input value="${esc(e.phone || '')}" data-f="phone" dir="ltr" placeholder="05xxxxxxxx" aria-label="رقم واتساب">
+      <label class="switch"><input type="checkbox" data-f="active" ${e.active ? 'checked' : ''}>مفعّلة</label></div>`).join('');
   }
-  $('entList').addEventListener('input', e => { const row = e.target.closest('.ent'); if (!row) return; const it = S.ents[+row.dataset.i]; const f = e.target.dataset.f; it[f] = f === 'active' ? (e.target.checked ? 1 : 0) : e.target.value; });
+  $('entList').addEventListener('input', e => { const row = e.target.closest('.ent'); if (!row) return; const it = S.ents[+row.dataset.i], f = e.target.dataset.f; it[f] = f === 'active' ? (e.target.checked ? 1 : 0) : e.target.value; });
   $('addEnt').onclick = () => { S.ents.push({ id: 'e' + Date.now(), name: 'جهة جديدة', phone: '', active: 1 }); renderEnts(); $('entList').lastElementChild.querySelector('input').select(); };
-  $('saveEnt').onclick = async () => { try { S.ents = (await api('/api/entities', { method: 'PUT', body: JSON.stringify({ items: S.ents }) })).items; fillEntSelect(); renderEnts(); toast('حُفظت الجهات'); } catch (e) { toast(e.message); } };
+  $('saveEnt').onclick = async () => { try { S.ents = (await api('/api/entities', { method: 'PUT', body: JSON.stringify({ items: S.ents }) })).items; fillFilters(); toast('حُفظت الجهات'); } catch (e) { toast(e.message); } };
+
+  const collectNtf = () => {
+    const notify = {}; NTF.forEach(([k]) => notify[k] = { on: document.querySelector(`[data-n="${k}"]`).checked, to: document.querySelector(`[data-nt="${k}"]`).value });
+    const sla = {}; C.PRIORITIES.forEach(p => sla[p.id] = +document.querySelector(`[data-sla="${p.id}"]`).value);
+    return { mail_to: $('mTo').value, mail_from: $('mFrom').value, notify, sla };
+  };
+  $('saveNtf').onclick = async () => { try { const d = await api('/api/settings', { method: 'PUT', body: JSON.stringify({ settings: collectNtf() }) }); S.set = d.settings; S.sla = d.settings.sla; toast('حُفظت الإشعارات والمهلة'); } catch (e) { toast(e.message); } };
+  $('testMail').onclick = async () => {
+    try { await api('/api/settings', { method: 'PUT', body: JSON.stringify({ settings: collectNtf() }) }); await api('/api/settings/test-email', { method: 'POST' }); toast('أُرسلت رسالة التجربة، تحقق من بريدك'); }
+    catch (e) { toast(e.message); }
+  };
 
   // ================= التحديث المباشر =================
   async function checkNew() {
     try {
-      const d = await api('/api/reports?status=new');
-      const n = d.items.length; $('newCnt').textContent = n; $('newCnt').hidden = !n;
-      document.title = (n ? `(${n}) ` : '') + 'لوحة متابعة البلاغات';
+      const d = await api('/api/reports?status=new'); const n = d.items.length;
+      $('newCnt').textContent = n; $('newCnt').hidden = !n; document.title = (n ? `(${n}) ` : '') + 'لوحة متابعة البلاغات';
       const top = d.items[0] ? d.items[0].id : 0;
       if (S.maxId && top > S.maxId) toast('وصل بلاغ جديد');
       S.seen = S.maxId || top; S.maxId = Math.max(S.maxId, top);
@@ -535,20 +684,19 @@
   }
   async function refresh(silent) {
     await checkNew();
-    if (S.view === 'dash') loadDash(); else if (S.view === 'reports') loadList(silent);
+    if (S.view === 'dash') loadDash(); else if (S.view === 'new') loadNew(); else if (S.view === 'reports') loadList(silent); else if (S.view === 'log') loadLog();
     $('sync').textContent = 'آخر تحديث ' + new Intl.DateTimeFormat('ar-SA-u-nu-latn', { timeZone: 'Asia/Riyadh', hour: 'numeric', minute: '2-digit' }).format(new Date());
   }
-
   async function start() {
     $('login').hidden = true; $('app').hidden = false; document.body.classList.add('app');
-    await loadEnts(); await checkNew(); S.seen = S.maxId; go('dash');
-    clearInterval(start.t); start.t = setInterval(() => { if (!document.hidden) refresh(true); }, 30000);
+    try { S.ents = (await api('/api/entities')).items; await loadSettings(); } catch {}
+    fillFilters(); await checkNew(); S.seen = S.maxId; go('dash');
+    const m = location.hash.match(/^#r(\d+)$/); if (m) openReport(+m[1]);
+    clearInterval(start.t); start.t = setInterval(() => { if (!document.hidden && S.view !== 'settings') refresh(true); }, 30000);
   }
-
-  // ================= البداية =================
+  window.addEventListener('hashchange', () => { const m = location.hash.match(/^#r(\d+)$/); if (m && S.token && (!S.open || S.open.report.id !== +m[1])) openReport(+m[1]); });
   const tok = store.get('bn_tok'), exp = +(tok.split('.')[0] || 0);
-  if (tok && exp > Date.now()) { S.token = tok; S.who = store.get('bn_who'); start(); }
-  else { $('login').hidden = false; }
+  if (tok && exp > Date.now()) { S.token = tok; S.who = store.get('bn_who'); start(); } else $('login').hidden = false;
 })();
 </script>
 </body>

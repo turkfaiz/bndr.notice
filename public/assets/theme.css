@@ -48,9 +48,16 @@ button,input,select,textarea{font:inherit;color:inherit}
 .p-critical{color:#fff;background:var(--p-critical)}
 .p-critical::before{background:#fff}
 
-input[type=text],input[type=tel],input[type=password],input:not([type]),select,textarea{
+input[type=text],input[type=tel],input[type=password],input[type=search],input:not([type]),select,textarea{
   width:100%;border:1px solid var(--line);background:var(--surface);border-radius:var(--r-md);padding:11px 14px;min-height:46px}
 textarea{resize:vertical;line-height:1.7}
 input:focus,select:focus,textarea:focus{border-color:var(--green-700);outline:none;box-shadow:0 0 0 3px var(--green-100)}
 
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* القوائم المنسدلة */
+select{appearance:none;-webkit-appearance:none;cursor:pointer;padding-inline-end:40px;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23145A4A' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-size:18px;background-position:left 14px center}
+select:invalid,select.empty{color:var(--muted)}
+option{color:var(--ink)}

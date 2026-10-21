@@ -13,3 +13,11 @@ html_handling = "auto-trailing-slash"
 binding = "DB"
 database_name = "bndr-notice-db"
 database_id = "dab54be7-b76b-4670-bd6b-6eb00a0ff8c4"
+
+# ملخص يومي بالبلاغات المتأخرة على البريد (4 UTC = 7 صباحاً بتوقيت مكة)
+[triggers]
+crons = ["0 4 * * *"]
+
+# الإشعارات البريدية: بعد تفعيل Email Service على نطاقك في Cloudflare احذف علامة # من السطرين التاليين
+# [[send_email]]
+# name = "EMAIL"
