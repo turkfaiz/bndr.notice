@@ -29,7 +29,7 @@ const DEFAULT_OPTIONS = {
 };
 const DEFAULT_SETTINGS = {
   sla: { normal: 72, urgent: 24, critical: 6 },            // مهلة المعالجة بالساعات
-  mail_to: '', mail_from: '', site_url: '',
+  mail_to: '', site_url: '',
   notify: {
     new: { on: 1, to: '' }, refer: { on: 1, to: '' }, close: { on: 1, to: '' },
     other: { on: 0, to: '' }, digest: { on: 1, to: '' }
@@ -64,7 +64,7 @@ async function route(req, env, ctx, url) {
   if (p === '/api/log' && m === 'GET') return activityLog(env, url);
   if (p === '/api/entities' && m === 'GET') return listEntities(env);
   if (p === '/api/entities' && m === 'PUT') return saveEntities(req, env);
-  if (p === '/api/settings' && m === 'GET') return J({ options: await getConf(env, 'options'), settings: await getConf(env, 'settings'), email_ready: !!env.EMAIL });
+  if (p === '/api/settings' && m === 'GET') return J({ options: await getConf(env, 'options'), settings: await getConf(env, 'settings'), email_ready: !!env.EMAIL, mail_from: env.MAIL_FROM || '' });
   if (p === '/api/settings' && m === 'PUT') return saveSettings(req, env, url);
   if (p === '/api/settings/test-email' && m === 'POST') return testEmail(env);
   return J({ error: 'المسار غير موجود' }, 404);
@@ -339,16 +339,16 @@ async function saveSettings(req, env, url) {
     const cur = await getConf(env, 'settings'), v = b.settings;
     const sla = {}; for (const p of PRIORITIES) sla[p] = Math.max(1, Math.min(24 * 90, Math.round(+((v.sla || {})[p]) || cur.sla[p])));
     const notify = {}; for (const k in DEFAULT_SETTINGS.notify) { const n = (v.notify || {})[k]; notify[k] = n ? { on: n.on ? 1 : 0, to: emails(n.to).join(', ') } : cur.notify[k]; }
-    await putConf(env, 'settings', { ...cur, sla, notify, mail_to: v.mail_to !== undefined ? emails(v.mail_to).join(', ') : cur.mail_to, mail_from: v.mail_from !== undefined ? s(v.mail_from, 120) : cur.mail_from, site_url: url.origin });
+    await putConf(env, 'settings', { ...cur, sla, notify, mail_to: v.mail_to !== undefined ? emails(v.mail_to).join(', ') : cur.mail_to, site_url: url.origin });
   }
-  return J({ ok: true, options: await getConf(env, 'options'), settings: await getConf(env, 'settings'), email_ready: !!env.EMAIL });
+  return J({ ok: true, options: await getConf(env, 'options'), settings: await getConf(env, 'settings'), email_ready: !!env.EMAIL, mail_from: env.MAIL_FROM || '' });
 }
 
 // ================= البريد الإلكتروني =================
 async function sendMail(env, st, to, subject, html, text) {
   if (!env.EMAIL) throw new Error('خدمة البريد غير مفعّلة بعد في Cloudflare (ربط EMAIL)');
-  const from = st.mail_from || env.MAIL_FROM;
-  if (!from) throw new Error('حدّد عنوان المرسل في إعدادات الإشعارات');
+  const from = env.MAIL_FROM;
+  if (!from) throw new Error('لم يُضبط عنوان المرسل في Cloudflare (المتغير MAIL_FROM)');
   if (!to.length) throw new Error('لا يوجد بريد مستلم');
   return env.EMAIL.send({ from: { email: from, name: OPS_NAME }, to, subject, html, text });
 }

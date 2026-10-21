@@ -16,7 +16,8 @@
 *,*::before,*::after{box-sizing:inherit}
 [hidden]{display:none!important}
 html{scroll-padding-top:env(safe-area-inset-top,0px)}
-body{margin:0;font-family:var(--font);color:var(--ink);background:var(--marble);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%;touch-action:manipulation}
+body{overflow-x:hidden;overscroll-behavior-y:none;margin:0;font-family:var(--font);color:var(--ink);background:var(--marble);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
 h1,h2,h3{font-family:var(--display);line-height:1.35;margin:0}
 button,input,select,textarea{font:inherit;color:inherit}
 :focus-visible{outline:3px solid var(--gold-300);outline-offset:2px}
@@ -61,3 +62,9 @@ select{appearance:none;-webkit-appearance:none;cursor:pointer;padding-inline-end
   background-repeat:no-repeat;background-size:18px;background-position:left 14px center}
 select:invalid,select.empty{color:var(--muted)}
 option{color:var(--ink)}
+
+/* الجوال: منع التكبير التلقائي عند الكتابة وتثبيت الصفحة */
+@media (max-width:860px){
+  input,select,textarea{font-size:16px!important}
+  body.lock{overflow:hidden;position:fixed;inset:0;width:100%}
+}

@@ -1,6 +1,8 @@
 name = "bndr-notice"
 main = "src/worker.js"
 compatibility_date = "2025-09-01"
+# يحفظ المتغيرات المضافة من لوحة Cloudflare (مثل MAIL_FROM) عند كل نشر
+keep_vars = true
 
 # الواجهتان (صفحة البلاغ + لوحة التحكم) ملفات ثابتة
 [assets]

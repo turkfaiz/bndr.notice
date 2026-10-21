@@ -2,7 +2,7 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
 <meta name="theme-color" content="#0B3D32">
 <meta name="robots" content="noindex">
 <title>لوحة متابعة البلاغات الميدانية</title>
@@ -58,7 +58,10 @@
   .seg button{border:0;background:transparent;padding:7px 13px;border-radius:9px;cursor:pointer;font-weight:600;font-size:14px}
   .seg button[aria-pressed="true"]{background:var(--green-800);color:#fff}
 
-  .kpis{display:grid;grid-template-columns:1.6fr repeat(5,1fr);gap:12px;margin-bottom:12px}
+  .kpis{display:grid;grid-template-columns:1.5fr repeat(4,1fr);gap:12px;margin-bottom:12px}
+  .kpi .two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .kpi .two div{display:flex;flex-direction:column;gap:2px}
+  .kpi .two b{font-size:22px}
   .kpi{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-md);padding:15px 16px;display:flex;flex-direction:column;justify-content:space-between;gap:8px}
   .kpi[data-go]{cursor:pointer}.kpi[data-go]:hover{border-color:var(--green-700)}
   .kpi span{font-size:13.5px;color:var(--muted);display:flex;align-items:center;gap:8px}
@@ -143,7 +146,7 @@
   .d-head h2{font-size:19px}
   .meta{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
   .close{margin-inline-start:auto;border:1px solid var(--line);background:var(--surface);border-radius:10px;width:40px;height:40px;display:grid;place-items:center;cursor:pointer;flex:none}
-  .d-body{overflow:auto;padding:16px 20px 30px;flex:1}
+  .d-body{overflow:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;padding:16px 20px 30px;flex:1}
   .d-photo{border-radius:var(--r-md);overflow:hidden;background:#dfe5e3;margin-bottom:12px;cursor:zoom-in}
   .d-photo img{width:100%;max-height:300px;object-fit:cover;display:block}
   .blk{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-md);padding:14px 16px;margin-bottom:12px}
@@ -162,7 +165,8 @@
   .tl small{color:var(--muted);display:block}
   .acts{background:var(--surface);border-top:1px solid var(--line);padding:14px 20px calc(14px + env(safe-area-inset-bottom,0px))}
   .act-tabs{display:flex;gap:6px;margin-bottom:12px}
-  .act-tabs button{flex:1;border:1px solid var(--line);background:var(--surface);border-radius:10px;padding:9px;cursor:pointer;font-weight:600;font-size:14px}
+  .act-tabs button{flex:1;display:flex;align-items:center;justify-content:center;gap:6px;border:1px solid var(--line);background:var(--surface);border-radius:10px;padding:9px;cursor:pointer;font-weight:600;font-size:14px;min-height:44px}
+  .act-tabs .ic{width:18px;height:18px}
   .act-tabs button[aria-pressed="true"]{border-color:var(--green-800);background:var(--green-100);color:var(--green-900)}
   .act-panel textarea{min-height:84px;font-size:14px}
   .act-panel select{margin-bottom:8px}
@@ -194,17 +198,90 @@
   .savebar{display:flex;justify-content:flex-end;gap:8px;margin-top:6px}
   .toast{position:fixed;bottom:calc(20px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;padding:11px 18px;border-radius:12px;z-index:50;font-size:14px;font-weight:600}
 
-  @media (max-width:1200px){.kpis{grid-template-columns:repeat(3,1fr)}.kpi.lead{grid-column:span 3}.c8,.c4,.c6{grid-column:span 12}}
+  @media (max-width:1200px){.kpis{grid-template-columns:repeat(4,1fr)}.kpi.lead{grid-column:span 4}.c8,.c4,.c6{grid-column:span 12}}
+  .ro{border:1px dashed var(--line);border-radius:var(--r-md);padding:11px 14px;min-height:46px;background:var(--marble);color:var(--muted);font-size:15px;overflow:hidden;text-overflow:ellipsis}
+  .sla{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+  .logt .lt{white-space:nowrap}.logt .lr{white-space:nowrap}
+
   @media (max-width:860px){
-    .top-in{flex-wrap:wrap;padding:10px 14px}.tabs{order:3;width:100%;margin:0}
-    .live{margin-inline-start:auto}.wrap{padding:14px}
-    .kpis{grid-template-columns:1fr 1fr}.kpi.lead{grid-column:span 2}
+    /* الشريط العلوي + شريط تنقل سفلي ثابت مثل التطبيقات */
+    .top-in{padding:10px 14px;gap:10px}
+    .top img{height:36px}.t1{font-size:15px}.t2{font-size:11px}
+    .live span{display:none}.live{margin-inline-start:auto}
+    .tabs{position:fixed;inset:auto 0 0 0;z-index:20;margin:0;border-radius:0;background:var(--surface);border-top:1px solid var(--line);
+      padding:6px 4px calc(6px + env(safe-area-inset-bottom,0px));display:grid;grid-template-columns:repeat(5,1fr);gap:2px;box-shadow:0 -4px 16px rgba(11,61,50,.06)}
+    .tabs button{flex-direction:column;gap:3px;padding:6px 2px;font-size:11.5px;color:var(--muted);border-radius:10px;position:relative;justify-content:center}
+    .tabs button .ic{width:22px;height:22px}
+    .tabs button[aria-selected="true"]{background:var(--green-100);color:var(--green-900)}
+    .tabs .cnt{position:absolute;top:2px;inset-inline-end:calc(50% - 22px);font-size:10.5px;min-width:18px;padding:0 5px}
+    .wrap{padding:14px 12px calc(86px + env(safe-area-inset-bottom,0px))}
+
+    .head{margin-bottom:12px;flex-wrap:nowrap;align-items:flex-start}
+    .head h2{font-size:20px}.head p{font-size:13px}
+    .head .btn{flex:none;padding:8px 12px;min-height:40px;font-size:14px}
+    #v-dash .head{flex-wrap:wrap}
+    .seg{width:100%;display:grid;grid-template-columns:repeat(5,1fr)}
+    .seg button{padding:8px 2px;font-size:13px}
+
+    .kpis{grid-template-columns:1fr 1fr;gap:10px}
+    .kpi.lead{grid-column:span 2}.kpi.lead b{font-size:36px}
+    .kpi{padding:13px 14px;min-height:112px}.kpi b{font-size:26px}
+    .kpi .two{grid-template-columns:1fr;gap:6px}
+    .kpi .two div{flex-direction:row;align-items:baseline;justify-content:space-between;gap:6px}
+    .kpi .two b{font-size:17px}
+    .aging{grid-template-columns:1fr 1fr}
+    .logt tr.cl:hover td{background:transparent}
+    .logt .ln:empty{display:none}
+    .grid{gap:10px}.card{padding:15px}
+    .hb{grid-template-columns:minmax(80px,42%) 1fr auto;font-size:13.5px}
+
+    /* شرائح الحالات: صف واحد يُسحب أفقياً */
+    .st-tabs{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin:0 -12px 12px;padding:0 12px}
+    .st-tabs::-webkit-scrollbar{display:none}
+    .st-tabs button{flex:none;white-space:nowrap}
+    .filters{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+    .filters .search{grid-column:1/-1}
+    .filters select{width:100%;min-width:0}
+
+    /* بطاقة البلاغ */
     .row.hd{display:none}
-    .row{grid-template-columns:1fr auto;grid-template-areas:"cat st" "loc pr" "ref age";gap:4px 10px}
-    .row .ref{grid-area:ref;text-align:start;direction:rtl;font-size:13px}.row .cat{grid-area:cat}.row .loc{grid-area:loc}
-    .row .age{grid-area:age;text-align:end}.row .pr{grid-area:pr;justify-self:end}.row .st{grid-area:st;justify-self:end}.row .who{display:none}
-    .cols3,.aging{grid-template-columns:1fr 1fr}.ent,.ntf{grid-template-columns:1fr 1fr}.ntf input[type=text]{grid-column:1/3}
-    .cat-ed{grid-template-columns:1fr 40px}.cat-ed textarea,.cat-ed select{grid-column:1/2}
+    .row{grid-template-columns:1fr auto auto;grid-template-areas:"cat cat st" "loc loc loc" "ref pr age";gap:6px 8px;padding:13px 14px}
+    .row .cat{grid-area:cat;font-size:15px}.row .st{grid-area:st;justify-self:end}
+    .row .loc{grid-area:loc;white-space:normal;font-size:13.5px;line-height:1.5}
+    .row .ref{grid-area:ref;text-align:start;direction:rtl;font-size:13px;align-self:center}
+    .row .pr{grid-area:pr;justify-self:end}.row .age{grid-area:age;text-align:end;align-self:center;white-space:nowrap}
+    .row .who{display:none}
+
+    /* السجل كبطاقات */
+    .tw{background:transparent;border:0}
+    .logt,.logt tbody{display:block;background:transparent}
+    .logt thead{display:none}
+    .logt tr{display:grid;grid-template-columns:1fr auto;grid-template-areas:"lr la" "ln ln" "lt lw";gap:6px 10px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r-md);padding:12px 14px;margin-bottom:8px}
+    .logt td{padding:0;border:0}
+    .logt .lr{grid-area:lr}.logt .la{grid-area:la;justify-self:end}.logt .ln{grid-area:ln;font-size:14px}
+    .logt .lt{grid-area:lt;font-size:12.5px;color:var(--muted)}.logt .lw{grid-area:lw;font-size:12.5px;color:var(--muted);text-align:end}
+
+    /* الإعدادات */
+    #setNav{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin:0 -12px 12px;padding:0 12px}
+    #setNav button{flex:none;white-space:nowrap}
+    .cols3{grid-template-columns:1fr;gap:0}
+    .fld textarea{min-height:150px}
+    .cat-ed{grid-template-columns:1fr 46px;grid-template-areas:"lb del" "en en" "qk qk"}
+    .cat-ed input{grid-area:lb}.cat-ed select{grid-area:en}.cat-ed .del{grid-area:del;width:46px}.cat-ed textarea{grid-area:qk}
+    .ent{grid-template-columns:1fr auto;grid-template-areas:"nm sw" "ph ph";gap:8px;padding:12px 0}
+    .ent.hd{display:none}
+    .ent input[data-f=name]{grid-area:nm}.ent input[data-f=phone]{grid-area:ph}.ent .switch{grid-area:sw}
+    .ntf{grid-template-columns:1fr auto;grid-template-areas:"tt sw" "em em";gap:8px}
+    .ntf>div{grid-area:tt}.ntf .switch{grid-area:sw}.ntf input[type=text]{grid-area:em}
+    .savebar{position:sticky;bottom:calc(72px + env(safe-area-inset-bottom,0px));background:var(--surface);border-top:1px solid var(--line);margin:14px -15px -15px;padding:12px 15px;border-radius:0 0 var(--r-md) var(--r-md);z-index:2}
+    .savebar .btn{flex:1}
+
+    /* تفاصيل البلاغ: ملء الشاشة */
+    .drawer{width:100%;animation:none}
+    .d-head{padding:12px 14px}.d-body{padding:12px 12px 20px}
+    .kv{grid-template-columns:92px 1fr}
+    .acts{padding:10px 12px calc(10px + env(safe-area-inset-bottom,0px))}
+    .act-panel textarea{min-height:70px}
   }
 </style>
 </head>
@@ -321,14 +398,14 @@
         <div id="mailState"></div>
         <div class="cols3">
           <div class="fld"><label for="mTo">البريد المستلم للإشعارات</label><input id="mTo" type="text" dir="ltr" placeholder="name@example.com"><p class="hint">يمكن إضافة أكثر من بريد بينها فاصلة.</p></div>
-          <div class="fld"><label for="mFrom">عنوان المرسل</label><input id="mFrom" type="text" dir="ltr" placeholder="alerts@yourdomain.com"><p class="hint">من نطاقك المفعّل في Cloudflare Email Service.</p></div>
+          <div class="fld"><label>عنوان المرسل</label><div class="ro" id="mFrom" dir="ltr"></div><p class="hint">ثابت ويُضبط في Cloudflare (المتغير MAIL_FROM).</p></div>
           <div class="fld" style="align-self:end"><button class="btn" id="testMail" style="width:100%"></button></div>
         </div>
         <h3 style="font-size:15px;margin:6px 0 4px">أنواع الإشعارات</h3>
         <p style="margin:0 0 6px;color:var(--muted);font-size:13px">اترك خانة البريد فارغة ليُرسل إلى البريد الرئيسي، أو اكتب بريداً مختلفاً لهذا النوع.</p>
         <div id="ntfList"></div>
         <h3 style="font-size:15px;margin:20px 0 10px">مهلة المعالجة <small style="font-family:var(--font);font-weight:400;color:var(--muted)">بالساعات، يُحسب بعدها البلاغ متأخراً</small></h3>
-        <div class="cols3" id="slaEd"></div>
+        <div class="sla" id="slaEd"></div>
         <div class="savebar"><button class="btn primary" id="saveNtf">حفظ الإشعارات والمهلة</button></div>
       </div>
     </section>
@@ -436,8 +513,7 @@
       <div class="kpi" data-go="new"><span><i style="background:var(--st-new)"></i>جديدة لم تُفتح</span><b class="num">${sc.new || 0}</b><small>تحتاج مراجعة</small></div>
       <div class="kpi" data-go="open"><span><i style="background:var(--st-review)"></i>مفتوحة الآن</span><b class="num">${d.open_n}</b><small>${(sc.referred || 0)} منها محالة</small></div>
       <div class="kpi ${d.overdue_n ? 'bad' : ''}" data-go="overdue"><span><i style="background:var(--p-critical)"></i>متأخرة</span><b class="num">${d.overdue_n}</b><small>تجاوزت مهلة المعالجة</small></div>
-      <div class="kpi"><span>${ic('clock')}متوسط المعالجة</span><b class="num" style="font-size:24px">${dur(d.avg_close_ms)}</b><small>من الرصد حتى الإقفال</small></div>
-      <div class="kpi"><span>${ic('chat')}أول استجابة</span><b class="num" style="font-size:24px">${dur(d.avg_response_ms)}</b><small>حتى الإحالة أو الإقفال</small></div>`;
+      <div class="kpi"><span>${ic('clock')}الأزمنة</span><div class="two"><div><b class="num">${dur(d.avg_response_ms)}</b><small>أول استجابة</small></div><div><b class="num">${dur(d.avg_close_ms)}</b><small>متوسط الإقفال</small></div></div></div>`;
     $('kpis').querySelectorAll('[data-go]').forEach(k => k.onclick = () => k.dataset.go === 'new' ? go('new') : go('reports', k.dataset.go));
 
     $('aging').innerHTML = ['أقل من يوم', '1 – 3 أيام', '3 – 7 أيام', 'أكثر من 7 أيام'].map((l, i) => `<div class="a${i}"><b class="num">${d.aging[i]}</b><span>${l}</span></div>`).join('');
@@ -539,8 +615,8 @@
   const logParams = () => new URLSearchParams({ action: $('lAct').value, range: $('lRange').value, q: $('lq').value.trim() });
   async function loadLog() {
     let d; try { d = await api('/api/log?' + logParams()); } catch (e) { return toast(e.message); }
-    $('logBody').innerHTML = d.items.length ? d.items.map(e => `<tr class="cl" data-id="${e.id}"><td style="white-space:nowrap">${fmtDate(e.at)}</td><td class="num" style="white-space:nowrap"><b style="color:var(--green-800)">${esc(e.ref)}</b><br><small style="color:var(--muted)">${esc(e.category_label)}</small></td>
-      <td><span class="act-b" style="color:${evColor[e.action]}">${evLabel[e.action] || e.action}</span></td><td>${esc(e.note || '—')}</td><td>${esc(e.actor || '')}</td></tr>`).join('') : '<tr><td colspan="5" class="empty">لا توجد حركات في هذه الفترة</td></tr>';
+    $('logBody').innerHTML = d.items.length ? d.items.map(e => `<tr class="cl" data-id="${e.id}"><td class="lt">${fmtDate(e.at)}</td><td class="num lr"><b style="color:var(--green-800)">${esc(e.ref)}</b><br><small style="color:var(--muted)">${esc(e.category_label)}</small></td>
+      <td class="la"><span class="act-b" style="color:${evColor[e.action]}">${evLabel[e.action] || e.action}</span></td><td class="ln">${esc(e.note || '')}</td><td class="lw">${esc(e.actor || '')}</td></tr>`).join('') : '<tr><td colspan="5" class="empty">لا توجد حركات في هذه الفترة</td></tr>';
     $('logBody').querySelectorAll('tr[data-id]').forEach(t => t.onclick = () => openReport(+t.dataset.id));
   }
   $('expLog').onclick = async () => {
@@ -583,6 +659,7 @@
         </div>
         <div class="acts" id="acts"></div>
       </aside>`;
+    document.body.classList.add('lock');
     $('scrim').onclick = closeDrawer; $('dClose').onclick = closeDrawer;
     if ($('dPhoto')) $('dPhoto').onclick = () => { const lb = document.createElement('div'); lb.className = 'lightbox'; lb.innerHTML = `<img src="${d.photo}" alt="">`; lb.onclick = () => lb.remove(); document.body.appendChild(lb); };
     renderActs(r.status === 'closed' ? 'reopen' : 'refer');
@@ -603,7 +680,7 @@
     } else {
       panel = `<textarea id="aNote" placeholder="ملاحظة داخلية تظهر في سجل البلاغ"></textarea><div class="btns"><button class="btn" id="aNoteBtn">إضافة الملاحظة</button></div>`;
     }
-    $('acts').innerHTML = `<div class="act-tabs"><button data-m="refer" aria-pressed="${mode === 'refer'}">إحالة عبر واتساب</button><button data-m="close" aria-pressed="${mode === 'close'}">إقفال</button><button data-m="note" aria-pressed="${mode === 'note'}">ملاحظة</button></div><div class="act-panel">${panel}</div>`;
+    $('acts').innerHTML = `<div class="act-tabs"><button data-m="refer" aria-pressed="${mode === 'refer'}">${ic('chat')}إحالة</button><button data-m="close" aria-pressed="${mode === 'close'}">${ic('check')}إقفال</button><button data-m="note" aria-pressed="${mode === 'note'}">${ic('list')}ملاحظة</button></div><div class="act-panel">${panel}</div>`;
     $('acts').querySelector('.act-tabs').onclick = e => { const b = e.target.closest('button'); if (b) renderActs(b.dataset.m); };
     if (mode === 'refer') {
       const sync = () => { const ent = S.ents.find(e => e.id === $('aEnt').value) || {}; $('aMsg').value = waText(r, $('aEnt').value, S.open.photo_link); $('aWarn').hidden = !!ent.phone; };
@@ -624,7 +701,7 @@
       refresh(true);
     } catch (e) { toast(e.message); }
   }
-  function closeDrawer() { $('drawerHost').innerHTML = ''; S.open = null; if (location.hash) history.replaceState(null, '', location.pathname); }
+  function closeDrawer() { document.body.classList.remove('lock'); $('drawerHost').innerHTML = ''; S.open = null; if (location.hash) history.replaceState(null, '', location.pathname); }
   document.addEventListener('keydown', e => { if (e.key === 'Escape') { const lb = document.querySelector('.lightbox'); lb ? lb.remove() : closeDrawer(); } });
 
   // ================= الإعدادات =================
@@ -635,7 +712,7 @@
   const lines = id => $(id).value.split('\n').map(x => x.trim()).filter(Boolean);
   const NTF = [['new', 'بلاغ جديد', 'فور وصول أي بلاغ من الميدان'], ['refer', 'إحالة بلاغ', 'عند إحالة بلاغ إلى جهة'], ['close', 'إقفال بلاغ', 'عند إقفال بلاغ مع طريقة المعالجة'], ['other', 'تحديثات أخرى', 'إعادة فتح البلاغ أو إضافة ملاحظة'], ['digest', 'ملخص يومي بالمتأخرة', 'كل يوم 7 صباحاً إن وُجدت بلاغات متأخرة']];
 
-  async function loadSettings() { const d = await api('/api/settings'); S.opt = d.options; S.set = d.settings; S.emailReady = d.email_ready; S.sla = d.settings.sla; }
+  async function loadSettings() { const d = await api('/api/settings'); S.opt = d.options; S.set = d.settings; S.emailReady = d.email_ready; S.mailFrom = d.mail_from; S.sla = d.settings.sla; }
   async function renderSettings() {
     try { await loadSettings(); } catch (e) { return toast(e.message); }
     $('setNav').querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', b.dataset.v === setTab));
@@ -645,7 +722,7 @@
     renderCats(); renderEnts();
     $('mailState').innerHTML = S.emailReady ? `<div class="banner ok">${ic('check')}<span>خدمة البريد مفعّلة. أرسل رسالة تجربة للتأكد.</span></div>`
       : `<div class="banner warn">${ic('alert')}<span>خدمة البريد لم تُفعّل بعد في Cloudflare. احفظ الإعدادات الآن، وستبدأ الإشعارات تلقائياً بعد تفعيل Email Service وربطه بالمشروع.</span></div>`;
-    $('mTo').value = st.mail_to; $('mFrom').value = st.mail_from;
+    $('mTo').value = st.mail_to; $('mFrom').textContent = S.mailFrom || 'لم يُضبط بعد';
     $('ntfList').innerHTML = NTF.map(([k, l, h]) => `<div class="ntf"><div><b>${l}</b><small>${h}</small></div><label class="switch"><input type="checkbox" data-n="${k}" ${st.notify[k].on ? 'checked' : ''}>تشغيل</label><input type="text" dir="ltr" data-nt="${k}" value="${esc(st.notify[k].to)}" placeholder="البريد الرئيسي"></div>`).join('');
     $('slaEd').innerHTML = C.PRIORITIES.slice().reverse().map(p => `<div class="fld"><label>${p.label}</label><input type="text" inputmode="numeric" dir="ltr" data-sla="${p.id}" value="${st.sla[p.id]}"></div>`).join('');
   }
@@ -677,7 +754,7 @@
   const collectNtf = () => {
     const notify = {}; NTF.forEach(([k]) => notify[k] = { on: document.querySelector(`[data-n="${k}"]`).checked, to: document.querySelector(`[data-nt="${k}"]`).value });
     const sla = {}; C.PRIORITIES.forEach(p => sla[p.id] = +document.querySelector(`[data-sla="${p.id}"]`).value);
-    return { mail_to: $('mTo').value, mail_from: $('mFrom').value, notify, sla };
+    return { mail_to: $('mTo').value, notify, sla };
   };
   $('saveNtf').onclick = async () => { try { const d = await api('/api/settings', { method: 'PUT', body: JSON.stringify({ settings: collectNtf() }) }); S.set = d.settings; S.sla = d.settings.sla; toast('حُفظت الإشعارات والمهلة'); } catch (e) { toast(e.message); } };
   $('testMail').onclick = async () => {
