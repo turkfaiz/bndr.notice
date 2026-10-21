@@ -8,8 +8,7 @@
   --r-sm:8px; --r-md:12px; --r-lg:18px;
   --font:'IBM Plex Sans Arabic', 'Segoe UI', Tahoma, sans-serif;
   --display:'Noto Kufi Arabic', 'IBM Plex Sans Arabic', Tahoma, sans-serif;
-  --pattern:url("/assets/pattern.svg");
-  --frieze:url("/assets/frieze.svg");
+  --lines:url("/assets/lines.svg");
   color-scheme: light;
   box-sizing:border-box;
   padding-top:env(safe-area-inset-top,0px);

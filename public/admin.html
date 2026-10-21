@@ -15,7 +15,7 @@
   body{min-height:100vh}
   .login{min-height:100vh;display:grid;place-items:center;padding:20px;
     background:linear-gradient(180deg,rgba(7,40,32,.6),rgba(11,61,50,.95)),url("assets/haram.jpg") center/cover}
-  .login::before{content:"";position:fixed;inset:0;background:var(--pattern);background-size:80px;opacity:.55;pointer-events:none}
+  .login::before{content:"";position:fixed;inset:0;background:var(--lines) center/cover no-repeat;opacity:.5;pointer-events:none}
   .login form{position:relative;background:var(--surface);border-radius:var(--r-lg);padding:30px 26px;width:min(390px,100%)}
   .login img{height:84px;width:auto;display:block;margin:0 auto 6px}
   .login h1,.login p.sub{text-align:center}
@@ -26,11 +26,11 @@
   .login .err{color:var(--p-critical);font-size:14px;min-height:1.4em;margin:10px 0 0}
 
   .top{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;color:#fff;
-    background:var(--pattern) 0 0/80px,linear-gradient(90deg,rgba(11,61,50,.97),rgba(11,61,50,.88)),url("assets/haram.jpg") center 40%/cover}
+    background:var(--lines) center 60%/cover no-repeat,linear-gradient(90deg,rgba(11,61,50,.97),rgba(11,61,50,.88)),url("assets/haram.jpg") center 40%/cover}
   body.app::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--green-900);z-index:11}
   .top-in{max-width:1360px;margin:0 auto;display:flex;align-items:center;gap:16px;padding:12px 20px}
   .top img{height:44px;width:auto}
-  .top::after{content:"";position:absolute;inset:auto 0 -7px;height:14px;background:var(--frieze) repeat-x center;pointer-events:none}
+  .top::after{content:"";position:absolute;inset:auto 0 0;height:1px;background:linear-gradient(90deg,transparent,rgba(227,207,159,.8) 30%,rgba(255,255,255,.3) 70%,transparent);pointer-events:none}
   .top-in{position:relative}
   .t1{font-family:var(--display);font-weight:700;font-size:17px;line-height:1.2}
   .t2{font-size:12px;color:var(--gold-300)}
@@ -42,7 +42,7 @@
   .live{display:flex;align-items:center;gap:6px;font-size:12px;color:#C7D6D0;white-space:nowrap}
   .live i{width:8px;height:8px;border-radius:50%;background:#5BD39B;box-shadow:0 0 0 4px rgba(91,211,155,.2)}
   .icon-btn{border:0;background:transparent;color:#fff;cursor:pointer;padding:6px;border-radius:8px;display:grid;place-items:center}
-  .wrap{max-width:1360px;margin:0 auto;padding:26px 20px 20px}
+  .wrap{max-width:1360px;margin:0 auto;padding:20px}
 
   .head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px;flex-wrap:wrap}
   .head h2{font-size:22px}
