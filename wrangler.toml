@@ -1,0 +1,15 @@
+name = "bndr-notice"
+main = "src/worker.js"
+compatibility_date = "2025-09-01"
+
+# الواجهتان (صفحة البلاغ + لوحة التحكم) ملفات ثابتة
+[assets]
+directory = "./public"
+binding = "ASSETS"
+html_handling = "auto-trailing-slash"
+
+# قاعدة البيانات (أُنشئت وجُهّزت جداولها)
+[[d1_databases]]
+binding = "DB"
+database_name = "bndr-notice-db"
+database_id = "dab54be7-b76b-4670-bd6b-6eb00a0ff8c4"
